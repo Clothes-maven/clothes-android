@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Clothes</string>
+    <string name="owner">owner</string>
+    <string name="purchase">采购员</string>
+    <string name="employee">店员</string>
+    <string name="name">名字</string>
+    <string name="pass">密码</string>
+</resources>
