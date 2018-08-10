@@ -20,14 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".home.HomeActivity">
+        <activity android:name=".home.HomeActivity">
         </activity>
         <activity
             android:name=".login.LoginActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".role.RoleActivity">
+        </activity>
+        <activity android:name=".addclothes.AddClothesActivity">
         </activity>
     </application>
 
