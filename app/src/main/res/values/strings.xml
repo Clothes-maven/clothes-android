@@ -5,4 +5,11 @@
     <string name="employee">店员</string>
     <string name="name">名字</string>
     <string name="pass">密码</string>
+
+    <string name="navigation_drawer_open">打开</string>
+    <string name="navigation_drawer_close">关闭</string>
+    <string name="nav_header_title">名字</string>
+    <string name="nav_header_subtitle">店铺</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
 </resources>

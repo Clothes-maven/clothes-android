@@ -42,11 +42,11 @@ public class LcAppWrapper extends ContextWrapper {
     public LcAppWrapper(Context base, boolean isDebug) {
         super(base);
         this.IS_DEBUG = isDebug;
-        initShare(base);
+        initShareUtils(base);
     }
 
 
-    public static void initShare(Context context) {
+    public static void initShareUtils(Context context) {
         SharedUtil.init(context);
     }
 
