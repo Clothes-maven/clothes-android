@@ -44,6 +44,8 @@ public class HomeFragment extends BaseFrament{
         return root;
     }
 
+
+
     private void init() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
         ArrayList<ClothBean> clothBeans = new ArrayList<>();

@@ -1,6 +1,7 @@
 package com.cloth.clothes.login;
 
 import com.cloth.clothes.common.LogImp;
+import com.cloth.clothes.login.usecase.HttpLoginUseCase;
 import com.cloth.clothes.model.Role;
 import com.cloth.clothes.common.http.ApiService;
 import com.cloth.kernel.service.LoggerWrapper;
@@ -47,23 +48,22 @@ public class RoleTest {
                 .ipPort("10.99.40.38",8888)
                 .build();
         httpClient.exec(ApiService.class)
-                .testMock("1")
+                .login("xmq","ddd")
 //                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseResponse<Object>>() {
+                .subscribe(new Observer<BaseResponse<HttpLoginUseCase.ResponseValue>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(BaseResponse<Object> objectBaseResponse) {
-                        String busiCode = objectBaseResponse.busiCode;
+                    public void onNext(BaseResponse<HttpLoginUseCase.ResponseValue> response) {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Throwable e1 = e;
-                        LoggerWrapper.wtf(e);
+
                     }
 
                     @Override
