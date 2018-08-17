@@ -72,6 +72,7 @@ public class HomeActivity extends BaseActivity
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("dddsakdjsakfsj");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -87,7 +88,6 @@ public class HomeActivity extends BaseActivity
             addFragmentToActivity(
                     getSupportFragmentManager(), homeFragment, R.id.contentFrame);
         }
-
 
     }
 

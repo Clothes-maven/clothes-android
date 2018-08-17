@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".addclothes.AddClothesActivity">
         </activity>
+        <activity android:name=".detail.DetailActivity">
+        </activity>
     </application>
 
 </manifest>

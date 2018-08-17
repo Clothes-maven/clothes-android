@@ -1,5 +1,6 @@
 package com.cloth.clothes.common.http;
 
+import com.cloth.clothes.home.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
 import com.cloth.kernel.service.http.model.BaseResponse;
 
@@ -13,5 +14,9 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/login")
     Observable<BaseResponse<HttpLoginUseCase.ResponseValue>> login(@Field("name") String name, @Field("pass") String pass);
+
+    @FormUrlEncoded
+    @POST("/clothes")
+    Observable<BaseResponse<HttpGetClothesUseCase.ResponseValue>> getClothes(@Field("uid") long uid);
 
 }

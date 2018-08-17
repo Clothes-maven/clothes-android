@@ -32,4 +32,5 @@ public class LoginPresenter implements LoginContract.IPresenter {
             }
         });
     }
+
 }

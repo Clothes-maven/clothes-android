@@ -69,4 +69,5 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
     public void toastStr(String msg) {
         ToastUtil.showShortMsg(this, msg);
     }
+
 }

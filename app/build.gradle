@@ -45,5 +45,7 @@ dependencies {
     implementation "com.android.support:design:$supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'//没有使用特殊Header，可以不加这行
 //    implementation "com.google.guava:guava:22.0"
 }

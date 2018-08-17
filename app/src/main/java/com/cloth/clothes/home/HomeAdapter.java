@@ -5,19 +5,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cloth.clothes.R;
-import com.cloth.clothes.home.domain.model.ClothBean;
+import com.cloth.clothes.detail.DetailActivity;
+import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.kernel.service.LcRouterWrapper;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
 
 
-    private List<ClothBean> mClothBeanList ;
-    public HomeAdapter(List<ClothBean> beanList) {
+    private List<ClothesBean> mClothBeanList ;
+    public HomeAdapter(@NonNull List<ClothesBean> beanList) {
         mClothBeanList = beanList;
+    }
+
+    public void setClothBeanList(@NonNull List<ClothesBean> clothBeanList) {
+        mClothBeanList = clothBeanList;
     }
 
     @NonNull
@@ -29,8 +36,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mTextView.setText(mClothBeanList.get(position).name);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        holder.desc.setText(mClothBeanList.get(position).name);
+        holder.size.setText(String.valueOf(mClothBeanList.get(position).size));
+        holder.batch.setText(mClothBeanList.get(position).batch);
+        holder.number.setText(String.valueOf(mClothBeanList.get(position).number));
+//        holder.clothesImg
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailActivity.jump(mClothBeanList.get(holder.getAdapterPosition()));
+            }
+        });
+
     }
 
     @Override
@@ -39,10 +57,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mTextView;
+        TextView desc;
+        TextView size;
+        TextView batch;
+        TextView number;
+        ImageView clothesImg;
         ViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.home_fragment_adapter_item_text_tv);
+            clothesImg = itemView.findViewById(R.id.home_fragment_adapter_item_cloth_img);
+            desc = itemView.findViewById(R.id.home_fragment_adapter_item_desc_tv);
+            size = itemView.findViewById(R.id.home_fragment_adapter_item_size_tv);
+            batch = itemView.findViewById(R.id.home_fragment_adapter_item_batch_tv);
+            number = itemView.findViewById(R.id.home_fragment_adapter_item_number_tv);
         }
     }
 

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="line">#c1bfbf</color>
+    <dimen name="normal_header">50dp</dimen>
 </resources>

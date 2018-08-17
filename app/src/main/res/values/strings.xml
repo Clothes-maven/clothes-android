@@ -12,4 +12,17 @@
     <string name="nav_header_subtitle">店铺</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">设置</string>
+
+    <string name="clothes_name">型号</string>
+    <string name="clothes_feature">特征/属性</string>
+    <string name="clothes_brand">品牌</string>
+    <string name="clothes_type">男/女装</string>
+    <string name="clothes_size">尺码</string>
+    <string name="clothes_texture">材质</string>
+    <string name="clothes_collar">领型</string>
+    <string name="clothes_sleeve">袖长</string>
+    <string name="clothes_batch">批次</string>
+    <string name="clothes_cost">原价</string>
+    <string name="clothes_profit">单品利润</string>
+    <string name="clothes_number">剩余数量</string>
 </resources>

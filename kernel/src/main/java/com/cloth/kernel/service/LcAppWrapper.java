@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.cloth.kernel.BuildConfig;
+import com.cloth.kernel.R;
 import com.cloth.kernel.base.utils.SharedUtil;
 
 import java.util.List;

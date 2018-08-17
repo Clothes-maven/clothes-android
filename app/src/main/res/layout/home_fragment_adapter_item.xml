@@ -1,10 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="60dp"
+              android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/home_fragment_adapter_item_text_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/home_fragment_adapter_item_cloth_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_clothes"/>
+
+    <RelativeLayout
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="长领单独的点点滴滴"
+            android:textSize="@dimen/high_size"/>
+
+        <TextView
+            android:id="@+id/_size"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="尺码："
+            android:textSize="@dimen/low_size"/>
+        <TextView
+            android:id="@+id/home_fragment_adapter_item_size_tv"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_toRightOf="@+id/_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26"
+            android:textSize="@dimen/low_size"/>
+
+        <TextView
+            android:id="@+id/_batch"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_toRightOf="@+id/home_fragment_adapter_item_size_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="型号："
+            android:textSize="@dimen/low_size"/>
+
+        <TextView
+            android:id="@+id/home_fragment_adapter_item_batch_tv"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_toRightOf="@+id/_batch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="H605"
+            android:textSize="@dimen/low_size"/>
+        <TextView
+            android:id="@+id/_number"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_toRightOf="@+id/home_fragment_adapter_item_batch_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="剩余："
+            android:textSize="@dimen/low_size"/>
+
+        <TextView
+            android:id="@+id/home_fragment_adapter_item_number_tv"
+            android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
+            android:layout_toRightOf="@+id/_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1029"
+            android:textSize="@dimen/low_size"/>
+
+    </RelativeLayout>
+
+
 </LinearLayout>
