@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.cloth.clothes.R;
 import com.cloth.kernel.service.LcAppWrapper;
+import com.kongzue.dialog.v2.DialogSettings;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -39,6 +40,7 @@ public class MyApplication extends Application{
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+
     }
 
 }

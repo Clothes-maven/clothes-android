@@ -64,4 +64,5 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     api "io.reactivex.rxjava2:rxjava:2.1.17"
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api  'com.kongzue.dialog:dialog:2.2.9.5'
 }

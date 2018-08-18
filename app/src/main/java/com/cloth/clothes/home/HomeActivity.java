@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
+import com.cloth.clothes.addclothes.AddClothesActivity;
 import com.cloth.clothes.model.Role;
 import com.cloth.kernel.base.BaseActivity;
 import com.cloth.kernel.base.utils.ToastUtil;
@@ -93,29 +94,37 @@ public class HomeActivity extends BaseActivity
 
     @OnClick(R.id.fab_add_task)
     public void fabClick() {
-        ToastUtil.showShortMsg(this,"add");
+        AddClothesActivity.jump();
     }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_about) {
+            ToastUtil.showShortMsg(this,"开发中。。。");
         }
+
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected boolean isSetStatusBarColor() {
+        return false;
     }
 }
