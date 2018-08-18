@@ -107,8 +107,7 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
         clothesBean = (ClothesBean) extras.getSerializable(CLOTHES);
         if (clothesBean ==null) return;
 
-        mDetailClothesAdapter = new DetailClothesAdapter(this,clothesBean);
-        mDetailClothesAdapter.setEnable(false);
+        mDetailClothesAdapter = new DetailClothesAdapter(this,clothesBean,false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         DividerItemDecoration decoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decoration);

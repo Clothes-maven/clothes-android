@@ -44,8 +44,7 @@ public class AddClothesActivity extends BaseActivity {
     @Override
     protected void init() {
         switchRightTv(View.VISIBLE,"添加");
-        mClothesAdapter = new DetailClothesAdapter(this,new ClothesBean());
-        mClothesAdapter.setEnable(false);
+        mClothesAdapter = new DetailClothesAdapter(this,new ClothesBean(),true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         DividerItemDecoration decoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decoration);
