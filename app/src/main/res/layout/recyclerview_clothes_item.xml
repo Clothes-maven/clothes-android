@@ -7,6 +7,7 @@
         android:id="@+id/recyclerview_clothes_item_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="型号"
         android:textSize="@dimen/high_size"/>
 
     <LinearLayout
@@ -20,7 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
+        android:text="H5066"
+        android:gravity="center"
         android:minWidth="200dp"
+        android:enabled="false"
         android:textColor="@color/text_color"
         android:textSize="@dimen/high_size"/>
     </LinearLayout>

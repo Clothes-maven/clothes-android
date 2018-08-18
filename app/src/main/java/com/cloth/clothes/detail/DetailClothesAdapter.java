@@ -26,11 +26,11 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
     private Context mContext;
     private ClothesBean mClothesBean;
 
-    public DetailClothesAdapter(Context context, ClothesBean clothesBean) {
+    public DetailClothesAdapter(Context context, ClothesBean clothesBean,boolean enabled) {
         this.mContext  = context;
         mItemList = new ArrayList<>();
         this.mClothesBean = clothesBean;
-        initList(context, clothesBean);
+        initList(context, clothesBean,enabled);
     }
 
     public ClothesBean getClothesBean() {
@@ -87,19 +87,19 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
         return mItemList.size();
     }
 
-    private void initList(Context context, ClothesBean clothesBean) {
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_name), clothesBean.name));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_feature), clothesBean.feature));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_brand), clothesBean.brand));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_type), clothesBean.type));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(clothesBean.size)));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_texture), clothesBean.texture));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.collar));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_sleeve), clothesBean.sleeve));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_batch), clothesBean.batch));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_cost), String.valueOf(clothesBean.cost)));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_profit), String.valueOf(clothesBean.profit)));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesBean.number)));
+    private void initList(Context context, ClothesBean clothesBean,boolean enabled) {
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_name), clothesBean.name,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_feature), clothesBean.feature,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_brand), clothesBean.brand,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_type), clothesBean.type,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(clothesBean.size),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_texture), clothesBean.texture,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.collar,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_sleeve), clothesBean.sleeve,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_batch), clothesBean.batch,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_cost), String.valueOf(clothesBean.cost),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_profit), String.valueOf(clothesBean.profit),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesBean.number),enabled));
     }
 
     private void setValue(Item item,int postion) {
@@ -194,9 +194,10 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
         String value;
         boolean enabled;
 
-        public Item(String desc, String value) {
+        public Item(String desc, String value, boolean enabled) {
             this.desc = desc;
             this.value = value;
+            this.enabled = enabled;
         }
     }
 }
