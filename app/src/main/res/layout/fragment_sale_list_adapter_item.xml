@@ -6,8 +6,10 @@
 
     <ImageView
         android:id="@+id/fragment_sale_list_adapter_item_cloth_img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/normal_10dp"
         android:src="@drawable/ic_clothes"/>
 
     <RelativeLayout

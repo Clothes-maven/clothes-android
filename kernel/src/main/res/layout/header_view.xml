@@ -10,7 +10,7 @@
         android:onClick="onBackClick"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_back"/>
 
