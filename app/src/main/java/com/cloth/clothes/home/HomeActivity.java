@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -164,5 +165,26 @@ public class HomeActivity extends BaseActivity
     protected void switchContent(@NonNull FragmentManager fragmentManager, int frameId, @NonNull android.support.v4.app.Fragment from, @NonNull android.support.v4.app.Fragment to) {
         super.switchContent(fragmentManager, frameId, from, to);
         currentFragm = to;
+    }
+
+
+
+    //============================================================================
+    private long clickTime = 0; //记录第一次点击的时间
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private void exit() {
+        if ((System.currentTimeMillis() - clickTime) > 2000) {
+            ToastUtil.showLongMsg(getApplicationContext(), "再按一次后退键退出程序");
+            clickTime = System.currentTimeMillis();
+        } else {
+            this.finish();
+        }
     }
 }

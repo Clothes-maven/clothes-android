@@ -26,16 +26,19 @@ public class RoleActivity extends BaseActivity {
     @OnClick(R.id.activity_role_owner_ll)
     public void ownerListener(){
         LoginActivity.jump(Role.OWNER);
+        finish();
     }
 
     @OnClick(R.id.activity_role_purchase_ll)
     public void purchaseListener(){
         LoginActivity.jump(Role.PURCHASE);
+        finish();
     }
 
     @OnClick(R.id.activity_role_employee_ll)
     public void employeeListener(){
         LoginActivity.jump(Role.EMPLOYEE);
+        finish();
     }
 
 

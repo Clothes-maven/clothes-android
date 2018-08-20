@@ -63,6 +63,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
     @Override
     public void jumpHomeAct(@Role.ROLE long role ,long id) {
         HomeActivity.jump(role,id);
+        finish();
     }
 
     @Override
