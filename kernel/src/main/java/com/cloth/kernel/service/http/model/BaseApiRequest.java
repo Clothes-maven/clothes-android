@@ -21,10 +21,10 @@ public abstract class BaseApiRequest implements Serializable {
      * @创建人 容芳志
      * @功能描述 通过反射获取当前request的成员变量为请求参数，添加签名和q参数加密
      */
-    public HashMap<String, String> getRequsetParams() {
-        //获取对象自己的属性
-         return getKeyAndValue(this);
-    }
+//    public HashMap<String, String> getRequsetParams() {
+//        //获取对象自己的属性
+//         return getKeyAndValue(this);
+//    }
 
     /**
      * @param obj 传入要获取成员变量为map的对象
@@ -32,7 +32,7 @@ public abstract class BaseApiRequest implements Serializable {
      * @创建人 容芳志
      * @功能描述 通过反射获取当前request的成员变量为请求参数
      */
-    private HashMap<String, String> getKeyAndValue(Object obj) {
+    private HashMap<String, String> keyAndValue(Object obj) {
         HashMap<String, String> map = new HashMap<>();
         // 得到类对象
         Class userCla = obj.getClass();

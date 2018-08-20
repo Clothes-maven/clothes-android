@@ -9,10 +9,10 @@
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        tools:replace="android:icon"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_clothes"
+        android:label="@string/clothes_app_name"
+        tools:replace="android:icon,android:label"
+        android:roundIcon="@mipmap/ic_clothes"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".splash.SplashActivity">

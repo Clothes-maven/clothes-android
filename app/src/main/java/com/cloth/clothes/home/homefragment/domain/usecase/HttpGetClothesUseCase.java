@@ -1,4 +1,4 @@
-package com.cloth.clothes.home.domain.usecase;
+package com.cloth.clothes.home.homefragment.domain.usecase;
 
 import android.support.annotation.NonNull;
 
@@ -27,7 +27,7 @@ public class HttpGetClothesUseCase extends HttpUseCase<HttpGetClothesUseCase.Req
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
-        return mIHttpRepository.exec(ApiService.class).getClothes(requestValue.uid);
+        return mIHttpRepository.exec(ApiService.class).getClothes(requestValue.uid,requestValue.number,requestValue.pager);
     }
 
     @Override
@@ -52,13 +52,17 @@ public class HttpGetClothesUseCase extends HttpUseCase<HttpGetClothesUseCase.Req
 
     public static final class RequestValue extends HttpUseCase.RequestValues{
         private final long uid;
+        private final int number;
+        private final int pager;
 
-        public RequestValue(long uid) {
+        public RequestValue(long uid, int number, int pager) {
             this.uid = uid;
+            this.number = number;
+            this.pager = pager;
         }
     }
 
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<ClothesBean> mClothesBeanList;
+        public List<ClothesBean> clothes;
     }
 }

@@ -33,6 +33,16 @@ public class UserManager {
         return 0;
     }
 
+    public long getRole() {
+        if (mUser ==null) {
+            mUser =  SharedUtil.getObject(USER_INFO,User.class);
+        }
+        if (mUser !=null) {
+            return mUser.role;
+        }
+        return 0;
+    }
+
     public User getUser() {
         return mUser;
     }

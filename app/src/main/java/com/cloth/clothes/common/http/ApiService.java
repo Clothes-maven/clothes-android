@@ -1,22 +1,32 @@
 package com.cloth.clothes.common.http;
 
-import com.cloth.clothes.home.domain.usecase.HttpGetClothesUseCase;
+import com.cloth.clothes.BuildConfig;
+import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
+import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
 import com.cloth.kernel.service.http.model.BaseResponse;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
-    @FormUrlEncoded
-    @POST("/login")
-    Observable<BaseResponse<HttpLoginUseCase.ResponseValue>> login(@Field("name") String name, @Field("pass") String pass);
+    String BASE_URL = BuildConfig.BASE_URL;
 
-    @FormUrlEncoded
-    @POST("/clothes")
-    Observable<BaseResponse<HttpGetClothesUseCase.ResponseValue>> getClothes(@Field("uid") long uid);
+    @POST("/user/login")
+    Observable<BaseResponse<HttpLoginUseCase.ResponseValue>> login(@Body HttpLoginUseCase.RequestValue body);
 
+    @GET("/store/getClothes")
+    Observable<BaseResponse<HttpGetClothesUseCase.ResponseValue>> getClothes(@Query("uid") long uid, @Query("number") int number, @Query("pager") int pager);
+
+    @POST("/store/goInStore")
+    Observable<BaseResponse<HttpFixClothesUseCase.ResponseValue>> addOrFix(@Body ClothesBean body);
+
+    @GET("/test")
+    Observable<BaseResponse<HttpSaleListUseCase.ResponseValue>> saleList();
 }

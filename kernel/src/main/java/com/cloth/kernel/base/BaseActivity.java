@@ -2,6 +2,7 @@ package com.cloth.kernel.base;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,11 +54,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void init() {
     }
 
-    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
+    protected   void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
                                              @NonNull Fragment fragment, int frameId) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
-        transaction.commit();
+        if (!fragment.isAdded()) {
+            transaction.add(frameId, fragment).commit();
+        } else {
+            transaction.show(fragment).commit();
+        }
+    }
+
+    protected void switchContent(@NonNull FragmentManager fragmentManager,
+                              @IdRes int frameId, @NonNull Fragment from, @NonNull Fragment to) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (!to.isAdded()) {
+            transaction.hide(from).add(frameId, to).commit();
+        } else {
+            transaction.hide(from).show(to).commit();
+        }
     }
 
     public void onBackClick(View view) {

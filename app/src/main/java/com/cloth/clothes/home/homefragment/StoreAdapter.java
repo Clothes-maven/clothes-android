@@ -1,4 +1,4 @@
-package com.cloth.clothes.home;
+package com.cloth.clothes.home.homefragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +11,14 @@ import android.widget.TextView;
 import com.cloth.clothes.R;
 import com.cloth.clothes.detail.DetailActivity;
 import com.cloth.clothes.home.domain.model.ClothesBean;
-import com.cloth.kernel.service.LcRouterWrapper;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
+public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
 
 
     private List<ClothesBean> mClothBeanList ;
-    public HomeAdapter(@NonNull List<ClothesBean> beanList) {
+    public StoreAdapter(@NonNull List<ClothesBean> beanList) {
         mClothBeanList = beanList;
     }
 
@@ -30,7 +29,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_fragment_adapter_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_home_adapter_item,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

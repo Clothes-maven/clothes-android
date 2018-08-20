@@ -15,6 +15,7 @@ import com.cloth.clothes.R;
 import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.detail.domain.usecase.HttpSellClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.model.BaseHttpRepository;
 import com.cloth.clothes.model.Role;
 import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.base.BaseActivity;
@@ -81,7 +82,7 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
     @Override
     public void onRightClick(View view) {
         DialogWrapper.waitDialog(this);
-        mIPresenter.fixClothes(clothesBean);
+        mIPresenter.fixClothes(mDetailClothesAdapter.getClothesBean());
     }
 
     @Override
@@ -96,8 +97,8 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
 
     @Override
     protected void init() {
-        mIPresenter = new DetailPresenter(this, UseCaseHandler.getInstance(),new HttpSellClothesUseCase(),new HttpFixClothesUseCase());
-        if (Role.isOwner(UserManager.getInstance().getId())) {
+        mIPresenter = new DetailPresenter(this, UseCaseHandler.getInstance(),new HttpSellClothesUseCase(),new HttpFixClothesUseCase(BaseHttpRepository.getBaseHttpRepository()));
+        if (Role.isOwner(UserManager.getInstance().getRole())) {
             mFixClothes.setVisibility(View.VISIBLE);
         }
 

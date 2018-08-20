@@ -26,7 +26,7 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValues) {
         return mIHttpRepository.exec(ApiService.class)
-                .login(requestValues.name, requestValues.pass);
+                .login(requestValues);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
         });
     }
 
-    public static final class RequestValue extends HttpUseCase.RequestValues {
-        private final String name;
-        private final String pass;
+    public static  class RequestValue extends HttpUseCase.RequestValues {
+        public   String userName;
+        public   String pass;
 
         public RequestValue(String name, String pass) {
-            this.name = name;
+            this.userName = name;
             this.pass = pass;
         }
     }

@@ -3,6 +3,8 @@ package com.cloth.clothes.login;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
 import com.cloth.kernel.base.mvpclean.UseCase;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
+import com.cloth.kernel.base.utils.ToastUtil;
+import com.cloth.kernel.service.LcAppWrapper;
 import com.cloth.kernel.service.LoggerWrapper;
 
 public class LoginPresenter implements LoginContract.IPresenter {
@@ -28,6 +30,7 @@ public class LoginPresenter implements LoginContract.IPresenter {
 
             @Override
             public void onError(int code, String msg) {
+                ToastUtil.showShortMsg(LcAppWrapper.getLcAppWrapper(),msg);
                 LoggerWrapper.e(msg);
             }
         });

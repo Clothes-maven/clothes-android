@@ -6,8 +6,9 @@
 
     <ImageView
         android:id="@+id/home_fragment_adapter_item_cloth_img"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
         android:src="@drawable/ic_clothes"/>
 
     <RelativeLayout
@@ -28,7 +29,7 @@
             android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="尺码："
+            android:text="@string/clothes_size"
             android:textSize="@dimen/low_size"/>
         <TextView
             android:id="@+id/home_fragment_adapter_item_size_tv"
@@ -46,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="型号："
+            android:text="@string/clothes_batch"
             android:textSize="@dimen/low_size"/>
 
         <TextView
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="剩余："
+            android:text="@string/clothes_number"
             android:textSize="@dimen/low_size"/>
 
         <TextView

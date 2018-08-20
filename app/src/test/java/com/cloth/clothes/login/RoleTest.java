@@ -1,5 +1,6 @@
 package com.cloth.clothes.login;
 
+import com.alibaba.fastjson.JSON;
 import com.cloth.clothes.common.LogImp;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
 import com.cloth.clothes.model.Role;
@@ -48,7 +49,7 @@ public class RoleTest {
                 .ipPort("10.99.40.38",8888)
                 .build();
         httpClient.exec(ApiService.class)
-                .login("xmq","ddd")
+                .login(new HttpLoginUseCase.RequestValue("dd","dd"))
 //                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseResponse<HttpLoginUseCase.ResponseValue>>() {
                     @Override
@@ -72,6 +73,16 @@ public class RoleTest {
                     }
                 });
 
+    }
+
+    @Test
+    public void fastJsonTest() {
+        HttpLoginUseCase.ResponseValue  responseValue = new HttpLoginUseCase.ResponseValue();
+        responseValue.address = "ddd";
+        responseValue.phone= "2q435443654";
+        HttpLoginUseCase.RequestValue requestValue = new HttpLoginUseCase.RequestValue("11","33");
+        System.out.print(JSON.toJSONString(requestValue));
+        System.out.print(JSON.toJSONString(responseValue));
     }
 
 }
