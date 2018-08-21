@@ -18,7 +18,7 @@ public class HttpSaleListUseCase extends HttpUseCase<HttpSaleListUseCase.Request
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue request) {
-        return mIHttpRepository.exec(ApiService.class).saleList();
+        return mIHttpRepository.exec(ApiService.class).saleList(request.time);
     }
 
     @Override
@@ -37,10 +37,11 @@ public class HttpSaleListUseCase extends HttpUseCase<HttpSaleListUseCase.Request
     }
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
-        private final long uid;
+        private final String time;
 
-        public RequestValue(long uid) {
-            this.uid = uid;
+
+        public RequestValue(String  time) {
+            this.time = time;
         }
     }
 

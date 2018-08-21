@@ -15,7 +15,7 @@ public interface HomeContract {
 
     interface IPresenter extends IBasePresenter {
         void getClothes(HomeContract.IStoreView iStoreView);
-        void saleList(HomeContract.ISaleView iSaleView);
+        void saleList(HomeContract.ISaleView iSaleView,String time);
     }
 
     interface ISaleView extends IBaseView<IPresenter>{

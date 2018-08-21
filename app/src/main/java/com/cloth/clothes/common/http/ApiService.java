@@ -27,6 +27,6 @@ public interface ApiService {
     @POST("/store/goInStore")
     Observable<BaseResponse<HttpFixClothesUseCase.ResponseValue>> addOrFix(@Body ClothesBean body);
 
-    @GET("/test")
-    Observable<BaseResponse<HttpSaleListUseCase.ResponseValue>> saleList();
+    @GET("/sellout/findByDate")
+    Observable<BaseResponse<HttpSaleListUseCase.ResponseValue>> saleList(@Query("time") String time);
 }

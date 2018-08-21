@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.cloth.clothes.utils.StringUtils.isDouble;
+import static com.cloth.clothes.utils.StringUtils.isInteger;
+
 public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdapter.ViewHolder> {
 
 
@@ -160,22 +163,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
     }
 
 
-    //判断整数（int）
-    private boolean isInteger(String str) {
-        if (null == str || "".equals(str)) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
-        return pattern.matcher(str).matches();
-    }
-    //判断浮点数（double和float）
-    private boolean isDouble(String str) {
-        if (null == str || "".equals(str)) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
-        return pattern.matcher(str).matches();
-    }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView desc;
