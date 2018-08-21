@@ -54,13 +54,17 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                mIPresenter.getClothes(StoreFragment.this);
+                if (mIPresenter !=null) {
+                    mIPresenter.getClothes(StoreFragment.this);
+                }
             }
         });
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                mIPresenter.getClothes(StoreFragment.this);
+                if (mIPresenter !=null) {
+                    mIPresenter.getClothes(StoreFragment.this);
+                }
             }
         });
         mIPresenter.getClothes(this);

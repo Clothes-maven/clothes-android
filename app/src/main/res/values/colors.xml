@@ -4,4 +4,5 @@
     <color name="text_color_999">#999999</color>
     <color name="text_color_666">#666666</color>
     <color name="text_color_333">#333333</color>
+    <color name="text_fix_enable">#FFE14B4B</color>
 </resources>
