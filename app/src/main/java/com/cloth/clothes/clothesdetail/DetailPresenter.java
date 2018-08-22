@@ -1,9 +1,9 @@
-package com.cloth.clothes.detail;
+package com.cloth.clothes.clothesdetail;
 
 import android.support.annotation.NonNull;
 
-import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
-import com.cloth.clothes.detail.domain.usecase.HttpSellClothesUseCase;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpSellClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.UseCase;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
@@ -29,11 +29,11 @@ public class DetailPresenter implements DetailContranct.IPresenter {
 
 
     @Override
-    public void sellClothes(ClothesBean clothesBean, String userName) {
-        mUseCaseHandler.execute(mSellClothesUseCase, new HttpSellClothesUseCase.RequestValue(clothesBean.name, userName), new UseCase.UseCaseCallback<HttpSellClothesUseCase.ResponseValue>() {
+    public void sellClothes(ClothesBean clothesBean, long userId,double sell) {
+        mUseCaseHandler.execute(mSellClothesUseCase, new HttpSellClothesUseCase.RequestValue(clothesBean.id,sell,1,userId), new UseCase.UseCaseCallback<HttpSellClothesUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpSellClothesUseCase.ResponseValue response) {
-                mIView.success();
+                mIView.sellSuccess();
             }
 
             @Override
@@ -48,7 +48,7 @@ public class DetailPresenter implements DetailContranct.IPresenter {
         mUseCaseHandler.execute(mHttpFixClothesUseCase, new HttpFixClothesUseCase.RequestValue(clothesBean), new UseCase.UseCaseCallback<HttpFixClothesUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpFixClothesUseCase.ResponseValue response) {
-                mIView.success();
+                mIView.fixSuccess();
             }
 
             @Override

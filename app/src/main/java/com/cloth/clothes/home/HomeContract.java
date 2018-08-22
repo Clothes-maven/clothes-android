@@ -2,20 +2,22 @@ package com.cloth.clothes.home;
 
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
+import com.cloth.kernel.base.eventbus.IOKEvent;
 import com.cloth.kernel.base.mvpclean.IBasePresenter;
 import com.cloth.kernel.base.mvpclean.IBaseView;
 
 import java.util.List;
 
 public interface HomeContract {
-    interface IStoreView extends IBaseView<IPresenter> {
+    interface IStoreView extends IBaseView<IPresenter> ,IOKEvent{
         void refresh(List<ClothesBean> clothBeans,boolean isSuccess);
         void setPresenter(IPresenter presenter);
+        void refreshItem(int position,ClothesBean clothesBean);
     }
 
     interface IPresenter extends IBasePresenter {
         void getClothes(HomeContract.IStoreView iStoreView);
-        void saleList(HomeContract.ISaleView iSaleView,String time);
+        void saleList(HomeContract.ISaleView iSaleView,String time,String name);
     }
 
     interface ISaleView extends IBaseView<IPresenter>{

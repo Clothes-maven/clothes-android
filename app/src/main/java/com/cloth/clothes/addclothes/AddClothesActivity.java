@@ -9,16 +9,14 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
-import com.cloth.clothes.detail.DetailClothesAdapter;
-import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.clothesdetail.DetailClothesAdapter;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.model.BaseHttpRepository;
 import com.cloth.kernel.base.BaseActivity;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
-import com.cloth.kernel.base.utils.ToastUtil;
 import com.cloth.kernel.service.DialogWrapper;
 import com.cloth.kernel.service.LcRouterWrapper;
-import com.kongzue.dialog.v2.WaitDialog;
 
 import butterknife.BindView;
 
@@ -60,8 +58,11 @@ public class AddClothesActivity extends BaseActivity implements AddContract.IVie
 
     @Override
     public void onRightClick(View view) {
-        mIPresenter.addClothes(mClothesAdapter.getClothesBean());
-        DialogWrapper.waitDialog(this);
+        ClothesBean clothesBean = mClothesAdapter.getClothesBean();
+        if (clothesBean !=null) {
+            mIPresenter.addClothes(clothesBean);
+            DialogWrapper.waitDialog(this);
+        }
     }
 
     @Override

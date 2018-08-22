@@ -3,7 +3,7 @@ package com.cloth.clothes.home.homefragment.domain.usecase;
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.common.http.HttpUseCase;
+import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
@@ -17,11 +17,9 @@ import io.reactivex.Observable;
 public class HttpGetClothesUseCase extends HttpUseCase<HttpGetClothesUseCase.RequestValue,HttpGetClothesUseCase.ResponseValue>{
 
     private final IHttpRepository mIHttpRepository;
-    private final IDataRepository mIDataRepository;
 
 
-    public HttpGetClothesUseCase(@NonNull IHttpRepository httpRepository, @NonNull IDataRepository dataRepository) {
-        this.mIDataRepository = dataRepository;
+    public HttpGetClothesUseCase(@NonNull IHttpRepository httpRepository) {
         this.mIHttpRepository = httpRepository;
     }
 

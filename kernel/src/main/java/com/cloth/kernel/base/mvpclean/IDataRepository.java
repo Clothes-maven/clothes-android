@@ -8,7 +8,7 @@ package com.cloth.kernel.base.mvpclean;
 public interface IDataRepository {
 
     <T> void saveLocalData(String key, T value);
-    <T> void getLocalData(String key, T defaultVal);
+    <T> T getLocalData(String key, T defaultVal);
     interface CallBack<R>{
         void success(R response);
         void error(@UseCase.CASE_TYPE int type, Throwable throwable);

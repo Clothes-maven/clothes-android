@@ -1,7 +1,7 @@
-package com.cloth.clothes.detail.domain.usecase;
+package com.cloth.clothes.clothesdetail.domain.usecase;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.common.http.HttpUseCase;
+import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;

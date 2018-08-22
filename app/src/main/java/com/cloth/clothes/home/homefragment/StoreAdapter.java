@@ -1,6 +1,7 @@
 package com.cloth.clothes.home.homefragment;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cloth.clothes.R;
-import com.cloth.clothes.detail.DetailActivity;
+import com.cloth.clothes.clothesdetail.DetailActivity;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 
 import java.util.List;
@@ -22,8 +23,14 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
         mClothBeanList = beanList;
     }
 
-    public void setClothBeanList(@NonNull List<ClothesBean> clothBeanList) {
-        mClothBeanList = clothBeanList;
+    public void refreshItem(@NonNull List<ClothesBean> clothBeanList) {
+        mClothBeanList.clear();
+        mClothBeanList.addAll(clothBeanList);
+    }
+
+    public void refreshItem(int position , @Nullable ClothesBean clothesBean) {
+        mClothBeanList.set(position,clothesBean);
+        notifyItemChanged(position);
     }
 
     @NonNull
@@ -44,7 +51,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DetailActivity.jump(mClothBeanList.get(holder.getAdapterPosition()));
+                DetailActivity.jump(mClothBeanList.get(holder.getAdapterPosition()),holder.getAdapterPosition());
             }
         });
 

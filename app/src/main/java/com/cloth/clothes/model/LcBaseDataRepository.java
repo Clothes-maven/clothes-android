@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
 import com.cloth.kernel.base.utils.SharedUtil;
 
+import java.lang.reflect.ParameterizedType;
+
 
 public class LcBaseDataRepository implements IDataRepository {
 
@@ -22,12 +24,12 @@ public class LcBaseDataRepository implements IDataRepository {
     }
 
 
-
     /**
      * 以{@link SharedPreferences#edit()} 的方式保存数据
-     * @param key key
+     *
+     * @param key   key
      * @param value value
-     * @param <T> value数据类型
+     * @param <T>   value数据类型
      */
     @Override
     public <T> void saveLocalData(String key, T value) {
@@ -42,31 +44,36 @@ public class LcBaseDataRepository implements IDataRepository {
         } else if (value instanceof Long) {
             SharedUtil.saveLong(key, (Long) value);
         } else {
-            SharedUtil.saveObject(key,value);
+            SharedUtil.saveObject(key, value);
         }
     }
 
     /**
      * 以{@code defaultVal}的数据类型取出数据，对应{@link #saveLocalData(String, Object)}
      * 使用{@link SharedPreferences#getString(String, String)}等的方式取
-     * @param key key
+     *
+     * @param key        key
      * @param defaultVal 默认值
-     * @param <T> 取的数据的类型
+     * @param <T>        取的数据的类型
      */
     @Override
-    public <T> void getLocalData(String key, T defaultVal) {
+    @SuppressWarnings("unchecked")
+    public <T> T getLocalData(String key, T defaultVal) {
         if (defaultVal instanceof String) {
-            SharedUtil.getString(key, (String) defaultVal);
+            return (T) SharedUtil.getString(key, (String) defaultVal);
         } else if (defaultVal instanceof Boolean) {
-            SharedUtil.getBoolean(key, (Boolean) defaultVal);
+            return (T) Boolean.valueOf(SharedUtil.getBoolean(key, (Boolean) defaultVal));
         } else if (defaultVal instanceof Integer) {
-            SharedUtil.getInt(key, (Integer) defaultVal);
+            return (T) Integer.valueOf(SharedUtil.getInt(key, (Integer) defaultVal));
         } else if (defaultVal instanceof Float) {
-            SharedUtil.getFloat(key); //todo 默认值
+            return (T) Float.valueOf(SharedUtil.getFloat(key)); //todo 默认值
         } else if (defaultVal instanceof Long) {
-            SharedUtil.getLong(key, (Long) defaultVal);
+            return (T) Long.valueOf(SharedUtil.getLong(key, (Long) defaultVal));
         } else {
-            SharedUtil.saveObject(key,defaultVal);
+            if ((T) SharedUtil.getObject(key, defaultVal.getClass()) == null) {
+                return defaultVal;
+            }
+            return (T) SharedUtil.getObject(key, defaultVal.getClass());
         }
     }
 }

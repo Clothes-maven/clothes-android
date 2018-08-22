@@ -1,6 +1,6 @@
 package com.cloth.clothes.addclothes;
 
-import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.UseCase;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;

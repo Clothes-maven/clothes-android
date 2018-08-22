@@ -23,16 +23,8 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "Integer", "ENV_CODE", "97"
-            buildConfigField "Boolean", "LOG_DEBUG", 'true'//日志输出
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            buildConfigField "Integer", "ENV_CODE", "99"
-            buildConfigField "Boolean", "LOG_DEBUG", 'false'//日志输出
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -43,7 +35,7 @@ def supportLibraryVersion = "27.1.1"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:design:$supportLibraryVersion"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

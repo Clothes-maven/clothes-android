@@ -1,7 +1,6 @@
 package com.cloth.clothes.home.salelist;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
+import com.cloth.clothes.saledetail.SaleDetailActivity;
 
 import java.util.List;
 
@@ -18,12 +18,13 @@ public class SaleListFragmentAdapter extends RecyclerView.Adapter<SaleListFragme
 
     private List<SaleBean> mSaleBeanList;
 
-    public SaleListFragmentAdapter(@Nullable List<SaleBean> saleBeanList) {
+    public SaleListFragmentAdapter(@NonNull List<SaleBean> saleBeanList) {
         mSaleBeanList = saleBeanList;
     }
 
     public void setSaleBeanList(@NonNull List<SaleBean> saleBeanList) {
-        mSaleBeanList = saleBeanList;
+        mSaleBeanList.clear();
+        mSaleBeanList.addAll(saleBeanList);
         notifyDataSetChanged();
     }
 
@@ -35,14 +36,22 @@ public class SaleListFragmentAdapter extends RecyclerView.Adapter<SaleListFragme
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         SaleBean saleBean = mSaleBeanList.get(position);
 //        holder.imgUrl
-        holder.name.setText(saleBean.name);
-        holder.cost.setText(saleBean.cost);
-        holder.sale.setText(saleBean.sale);
-        holder.profit.setText(saleBean.profit);
-        holder.employee.setText(saleBean.employee);
+        holder.name.setText(saleBean.clothes.name);
+        holder.cost.setText(String.valueOf(saleBean.clothes.cost));
+        holder.sale.setText(String.valueOf(saleBean.sell));
+        double profit = saleBean.sell - saleBean.clothes.cost;
+        holder.profit.setText(String.valueOf(profit));
+        holder.employee.setText(saleBean.user.name);
+        holder.time.setText(saleBean.createDate);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SaleDetailActivity.jump(mSaleBeanList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -60,14 +69,16 @@ public class SaleListFragmentAdapter extends RecyclerView.Adapter<SaleListFragme
         TextView sale;
         TextView profit;
         TextView employee;
+        TextView time;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.fragment_sale_list_adapter_item_desc_tv);
+            name = itemView.findViewById(R.id.fragment_sale_list_adapter_item_name_tv);
             cost = itemView.findViewById(R.id.fragment_sale_list_adapter_item_cost_tv);
             sale = itemView.findViewById(R.id.fragment_sale_list_adapter_item_sale_tv);
             profit = itemView.findViewById(R.id.fragment_sale_list_adapter_item_profit_tv);
             employee = itemView.findViewById(R.id.fragment_sale_list_adapter_item_employee_tv);
+            time = itemView.findViewById(R.id.fragment_sale_list_adapter_item_time_tv);
         }
     }
 }

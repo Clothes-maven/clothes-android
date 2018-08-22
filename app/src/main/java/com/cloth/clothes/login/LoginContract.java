@@ -7,11 +7,12 @@ import com.cloth.kernel.base.mvpclean.IBaseView;
 public interface LoginContract {
 
      interface IPresenter extends IBasePresenter{
-         void login(String name,String pass);
+         void login(String name,String pass,boolean isRemember);
      }
 
      interface IView extends IBaseView<IPresenter>{
          void jumpHomeAct(@Role.ROLE long role ,long id);
          void toastStr(String msg);
+         void setUserPass(String user,String pass);
      }
 }

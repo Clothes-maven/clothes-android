@@ -1,12 +1,14 @@
 package com.cloth.clothes.home.salelist.domain.model;
 
-public class SaleBean {
+import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.model.UserManager;
 
-    public String imgUrl;
-    public String name;
-    public int cost;
-    public int sale;
-    public int profit;
-    public String employee;
+import java.io.Serializable;
 
+public class SaleBean implements Serializable{
+    public long subId;
+    public ClothesBean clothes;
+    public double sell;
+    public UserManager.User user;
+    public String createDate;
 }

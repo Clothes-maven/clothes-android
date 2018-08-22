@@ -1,7 +1,8 @@
 package com.cloth.clothes.common.http;
 
 import com.cloth.clothes.BuildConfig;
-import com.cloth.clothes.detail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
+import com.cloth.clothes.clothesdetail.domain.usecase.HttpSellClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
@@ -29,4 +30,7 @@ public interface ApiService {
 
     @GET("/sellout/findByDate")
     Observable<BaseResponse<HttpSaleListUseCase.ResponseValue>> saleList(@Query("time") String time);
+
+    @POST("/sellout/sell")
+    Observable<BaseResponse<HttpSellClothesUseCase.ResponseValue>> sellClothes(@Body HttpSellClothesUseCase.RequestValue body);
 }

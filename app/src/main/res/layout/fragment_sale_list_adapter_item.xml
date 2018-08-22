@@ -13,87 +13,97 @@
         android:src="@drawable/ic_clothes"/>
 
     <RelativeLayout
-        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
 
         <TextView
-            android:id="@+id/fragment_sale_list_adapter_item_desc_tv"
+            android:id="@+id/fragment_sale_list_adapter_item_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:text="长领单独的点点滴滴"
             android:textSize="@dimen/high_size"/>
+        <TextView
+            android:id="@+id/fragment_sale_list_adapter_item_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/normal_20dp"
+            android:text="2018-08"
+            android:layout_alignBottom="@+id/fragment_sale_list_adapter_item_name_tv"/>
 
         <TextView
             android:id="@+id/_cost"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
             android:text="@string/clothes_cost"
             android:textSize="@dimen/low_size"/>
+
         <TextView
             android:id="@+id/fragment_sale_list_adapter_item_cost_tv"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
+            android:layout_toRightOf="@+id/_cost"
             android:text="26"
             android:textSize="@dimen/low_size"/>
 
         <TextView
             android:id="@+id/_sale"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_cost_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_cost_tv"
             android:text="@string/clothes_sale"
             android:textSize="@dimen/low_size"/>
 
         <TextView
             android:id="@+id/fragment_sale_list_adapter_item_sale_tv"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/_sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
+            android:layout_toRightOf="@+id/_sale"
             android:text="H605"
             android:textSize="@dimen/low_size"/>
 
         <TextView
             android:id="@+id/_profit"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_sale_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_sale_tv"
             android:text="@string/clothes_profit"
             android:textSize="@dimen/low_size"/>
 
         <TextView
             android:id="@+id/fragment_sale_list_adapter_item_profit_tv"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/_profit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
+            android:layout_toRightOf="@+id/_profit"
             android:text="H605"
             android:textSize="@dimen/low_size"/>
+
         <TextView
             android:id="@+id/_employee"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_profit_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
             android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/fragment_sale_list_adapter_item_profit_tv"
             android:text="@string/clothes_sale_name"
             android:textSize="@dimen/low_size"/>
 
         <TextView
             android:id="@+id/fragment_sale_list_adapter_item_employee_tv"
-            android:layout_below="@+id/fragment_sale_list_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/_employee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_sale_list_adapter_item_name_tv"
+            android:layout_toRightOf="@+id/_employee"
             android:text="1029"
             android:textSize="@dimen/low_size"/>
 

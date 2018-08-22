@@ -2,6 +2,7 @@ package com.cloth.clothes.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -46,7 +48,7 @@ public class HomeActivity extends BaseActivity
         Bundle bundle = new Bundle();
         bundle.putLong(ROLE, role);
         bundle.putLong(ID, id);
-        LcRouterWrapper.getLcRouterWrapper().jumpActWithPath(PATH);
+        LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(PATH,bundle);
     }
 
     @BindView(R.id.toolbar)
@@ -55,11 +57,14 @@ public class HomeActivity extends BaseActivity
     DrawerLayout mDrawerLayout;
     @BindView(R.id.nav_view)
     NavigationView mNavigationView;
+    @BindView(R.id.fab_add_task)
+    FloatingActionButton mAddBtn;
 
     MenuItem mSellListItem;
 
     TextView mNameTv;
     TextView mAddressTv;
+    ImageView mHeader;
 
 
     @Override
@@ -84,15 +89,15 @@ public class HomeActivity extends BaseActivity
         }
         mSellListItem = mNavigationView.getMenu().findItem(R.id.nav_sell_list);
         mNameTv = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_main_name_tv);
+        mHeader = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_main_head_img);
         mAddressTv = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_main_address_tv);
-        if (Role.isOwner(mRole)) {
+
+        if (Role.isOwner(mRole) ) {
+            mSellListItem.setVisible(true);
+            mAddBtn.setVisibility(View.VISIBLE);
+        } else {
             mSellListItem.setVisible(false);
-        }
-        if (Role.isEmployee(mRole)) {
-
-        }
-        if (Role.isPurchase(mRole)) {
-
+            mAddBtn.setVisibility(View.GONE);
         }
         mNameTv.setText(UserManager.getInstance().getUser().name);
         mAddressTv.setText(UserManager.getInstance().getUser().address);
@@ -112,7 +117,7 @@ public class HomeActivity extends BaseActivity
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mIPresenter = new HomeFrgPresenter(UseCaseHandler.getInstance(),
-                new HttpGetClothesUseCase(BaseHttpRepository.getBaseHttpRepository(), LcBaseDataRepository.getLcBaseRepository()),
+                new HttpGetClothesUseCase(BaseHttpRepository.getBaseHttpRepository()),
                 new HttpSaleListUseCase(BaseHttpRepository.getBaseHttpRepository()));
 
 

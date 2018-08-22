@@ -1,5 +1,8 @@
 package com.cloth.clothes.home.salelist;
 
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,12 +11,18 @@ import android.widget.TextView;
 
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.HomeContract;
+import com.cloth.clothes.home.homefragment.StoreFragment;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
 import com.cloth.clothes.utils.StringUtils;
 import com.cloth.kernel.base.BaseFragment;
 import com.cloth.kernel.base.utils.ToastUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -30,6 +39,7 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
     private EditText mYear, mMonth, mDay, mUserName;
     private TextView mFindTv;
     private RecyclerView mRecyclerView;
+    private SmartRefreshLayout mRefreshLayout;
     private SaleListFragmentAdapter mAdapter;
     private HomeContract.IPresenter mIPresenter;
 
@@ -46,6 +56,7 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
         mMonth = view.findViewById(R.id.fragment_sale_list_month_ed);
         mDay = view.findViewById(R.id.fragment_sale_list_day_ed);
         mUserName = view.findViewById(R.id.fragment_sale_list_name_ed);
+        mRefreshLayout = view.findViewById(R.id.fragment_sale_list_refresh_layout);
         mFindTv = view.findViewById(R.id.fragment_sale_list_find_tv);
         mFindTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,20 +64,42 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
                 getSaleList();
             }
         });
-        mAdapter = new SaleListFragmentAdapter(null);
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                getSaleList();
+            }
+        });
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                getSaleList();
+            }
+        });
+        mAdapter = new SaleListFragmentAdapter(new ArrayList<SaleBean>());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(decoration);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setHasFixedSize(true);
         setNowTime();
-        mIPresenter.saleList(this, new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(new Date()));
+        mIPresenter.saleList(this, new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(new Date()),null);
     }
 
 
     @Override
     public void success(List<SaleBean> list) {
+        mRefreshLayout.finishRefresh(true);
+        mRefreshLayout.finishLoadMore(true);
         mAdapter.setSaleBeanList(list);
     }
 
     @Override
     public void error(String msg) {
+        mRefreshLayout.finishRefresh(false);
+        mRefreshLayout.finishLoadMore(false);
         ToastUtil.showShortMsg(getActivity(), msg);
     }
 
@@ -91,8 +124,10 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
             ToastUtil.showLongMsg(getActivity(), "日/天用纯数字表示，例如：02");
             return;
         }
+        String namrStr = mUserName.getText().toString().trim();
+
         if (mIPresenter != null) {
-            mIPresenter.saleList(this, yearStr + "-" + monthStr + "-" + dayStr);
+            mIPresenter.saleList(this, yearStr + "-" + monthStr + "-" + dayStr,namrStr);
         }
 
     }
@@ -100,6 +135,7 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
     private void setNowTime() {
         Calendar calendar = Calendar.getInstance();
         mYear.setText(String.valueOf(calendar.get(GregorianCalendar.YEAR)));
+        mYear.setSelection(mYear.getText().length());
         mMonth.setText(String.valueOf(calendar.get(GregorianCalendar.MONTH) + 1));
         mDay.setText(String.valueOf(calendar.get(GregorianCalendar.DAY_OF_MONTH)));
     }

@@ -5,7 +5,7 @@ import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.HttpClient;
 
 public class BaseHttpRepository implements IHttpRepository {
-    
+
     private static  volatile BaseHttpRepository mHttpRepository;
     public static BaseHttpRepository getBaseHttpRepository() {
         if (mHttpRepository == null) {
@@ -21,7 +21,7 @@ public class BaseHttpRepository implements IHttpRepository {
     private final HttpClient httpClient;
     public BaseHttpRepository() {
         httpClient = new HttpClient.Builder()
-                .ipPort("10.99.40.38",8888)
+//                .ipPort("10.99.40.38",8888)
                 .baseUrl(ApiService.BASE_URL)
                 .build();
     }

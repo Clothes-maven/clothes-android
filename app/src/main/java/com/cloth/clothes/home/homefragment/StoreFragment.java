@@ -1,5 +1,8 @@
 package com.cloth.clothes.home.homefragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +13,7 @@ import com.cloth.clothes.R;
 import com.cloth.clothes.home.HomeContract;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.BaseFragment;
+import com.cloth.kernel.service.LcEventBusWrapper;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -29,6 +33,18 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
 
     public static StoreFragment newInstance() {
         return new StoreFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        LcEventBusWrapper.getInstance().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LcEventBusWrapper.getInstance().unregister(this);
     }
 
     @Override
@@ -82,14 +98,24 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
             mHomeAdapter = new StoreAdapter(clothBeans);
             mRecyclerView.setAdapter(mHomeAdapter);
         } else {
-            mHomeAdapter.setClothBeanList(clothBeans);
+            mHomeAdapter.refreshItem(clothBeans);
         }
         mHomeAdapter.notifyDataSetChanged();
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void setPresenter(HomeContract.IPresenter presenter) {
         mIPresenter =presenter;
+    }
+
+    @Override
+    public void refreshItem(int position, ClothesBean clothesBean) {
+        mHomeAdapter.refreshItem(position,clothesBean);
     }
 
 }

@@ -19,4 +19,12 @@ public class StringUtils {
         Pattern pattern = Pattern.compile("^[-\\+]?[.\\d]*$");
         return pattern.matcher(str).matches();
     }
+
+    public static boolean isEmpty(String str) {
+        if (str ==null || str.length() ==0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

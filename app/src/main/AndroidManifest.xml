@@ -11,28 +11,30 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_clothes"
         android:label="@string/clothes_app_name"
-        tools:replace="android:icon,android:label"
         android:roundIcon="@mipmap/ic_clothes"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:label">
         <activity android:name=".splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity">
         </activity>
         <activity
             android:name=".login.LoginActivity"
             android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".role.RoleActivity">
         </activity>
         <activity android:name=".addclothes.AddClothesActivity">
         </activity>
-        <activity android:name=".detail.DetailActivity">
+        <activity android:name=".clothesdetail.DetailActivity">
+        </activity>
+        <activity android:name=".saledetail.SaleDetailActivity">
         </activity>
     </application>
 

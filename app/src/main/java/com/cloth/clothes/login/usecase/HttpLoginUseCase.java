@@ -3,7 +3,7 @@ package com.cloth.clothes.login.usecase;
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.common.http.HttpUseCase;
+import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
@@ -16,6 +16,7 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
 
     private final IHttpRepository mIHttpRepository;
     private final IDataRepository mIDataRepository;
+    public static final String LOGIN_USER_PASS = "login_user_pass";
 
 
     public HttpLoginUseCase(@NonNull IHttpRepository httpRepository, @NonNull IDataRepository dataRepository) {
@@ -29,6 +30,13 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
                 .login(requestValues);
     }
 
+    /**
+     * 获得用户名以及密码
+     */
+    public RequestValue getUserPass() {
+       return mIDataRepository.getLocalData(LOGIN_USER_PASS,new RequestValue("",""));
+    }
+
     @Override
     protected void exec(Observable<BaseResponse<ResponseValue>> observable) {
         observable.subscribe(new BaseObserver<BaseResponse<ResponseValue>>() {
@@ -36,6 +44,7 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
             public void success(BaseResponse<ResponseValue> response) {
                 ResponseValue content = response.getContent();
                 if (response.code == SUCCESS) {
+                    mIDataRepository.saveLocalData(LOGIN_USER_PASS, getRequestValues());
                     if (content != null) {
                         UserManager.User user = new UserManager.User();
                         user.role = content.role;
@@ -45,24 +54,27 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
                         user.sex = content.sex;
                         user.phone = content.phone;
                         user.qq = content.qq;
-                        UserManager.getInstance().setUser(user,mIDataRepository);
+                        UserManager.getInstance().setUser(user, mIDataRepository);
                         getUseCaseCallback().onSuccess(response.getContent());
-                    }else {
-                        getUseCaseCallback().onError(LOCAL_FAIL,"未传递user信息");
+                    } else {
+                        getUseCaseCallback().onError(LOCAL_FAIL, "未传递user信息");
                     }
                 }
             }
 
             @Override
             public void error(int code, String msg) {
-                getUseCaseCallback().onError(code,msg);
+                getUseCaseCallback().onError(code, msg);
             }
         });
     }
 
-    public static  class RequestValue extends HttpUseCase.RequestValues {
-        public   String userName;
-        public   String pass;
+    public static class RequestValue extends HttpUseCase.RequestValues {
+        public  String userName;
+        public  String pass;
+
+        public RequestValue() {
+        }
 
         public RequestValue(String name, String pass) {
             this.userName = name;
@@ -78,18 +90,5 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
         public String phone;
         public String qq;
         public long id;
-
-        @Override
-        public String toString() {
-            return "ResponseValue{" +
-                    "role=" + role +
-                    ", name='" + name + '\'' +
-                    ", sex='" + sex + '\'' +
-                    ", address='" + address + '\'' +
-                    ", phone='" + phone + '\'' +
-                    ", qq='" + qq + '\'' +
-                    ", id=" + id +
-                    '}';
-        }
     }
 }

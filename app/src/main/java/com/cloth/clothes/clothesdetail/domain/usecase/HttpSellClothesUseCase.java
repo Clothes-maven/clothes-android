@@ -1,31 +1,28 @@
-package com.cloth.clothes.home.salelist.domain.usecase;
+package com.cloth.clothes.clothesdetail.domain.usecase;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.utils.StringUtils;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
-import com.cloth.clothes.home.salelist.domain.model.SaleBean;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;
 import com.cloth.kernel.service.http.model.BaseResponse;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import io.reactivex.Observable;
 
-public class HttpSaleListUseCase extends HttpUseCase<HttpSaleListUseCase.RequestValue, HttpSaleListUseCase.ResponseValue> {
+/**
+ * 卖出一件衣服的case
+ */
+public class HttpSellClothesUseCase extends HttpUseCase<HttpSellClothesUseCase.RequestValue, HttpSellClothesUseCase.ResponseValue> {
 
 
     private IHttpRepository mIHttpRepository;
 
-    public HttpSaleListUseCase(IHttpRepository IHttpRepository) {
+    public HttpSellClothesUseCase(IHttpRepository IHttpRepository) {
         mIHttpRepository = IHttpRepository;
     }
 
     @Override
-    protected Observable<BaseResponse<ResponseValue>> params(RequestValue request) {
-        return mIHttpRepository.exec(ApiService.class).saleList(request.time);
+    protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
+        return mIHttpRepository.exec(ApiService.class).sellClothes(requestValue);
     }
 
     @Override
@@ -34,13 +31,6 @@ public class HttpSaleListUseCase extends HttpUseCase<HttpSaleListUseCase.Request
             @Override
             public void success(BaseResponse<ResponseValue> response) {
                 if (response.getCode() == SUCCESS) {
-                    if (!StringUtils.isEmpty(getRequestValues().name)) {
-                        for (int i = response.getContent().sellOuts.size() - 1; i >= 0; i--) {
-                            if (!getRequestValues().name.equals(response.getContent().sellOuts.get(i).user.name)) {
-                                response.getContent().sellOuts.remove(i);
-                            }
-                        }
-                    }
                     getUseCaseCallback().onSuccess(response.getContent());
                 } else {
                     getUseCaseCallback().onError(response.getCode(), response.getMsg());
@@ -55,16 +45,20 @@ public class HttpSaleListUseCase extends HttpUseCase<HttpSaleListUseCase.Request
     }
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
-        private final String time;
-        private final String name;
+        public final long clothesId;//服装品类id
+        public final double sell;//卖出价格
+        public final long number;//卖出数量
+        public final long userId;//卖出人id
 
-        public RequestValue(String time, String name) {
-            this.time = time;
-            this.name = name;
+        public RequestValue(long clothesId, double sell, long number, long userId) {
+            this.clothesId = clothesId;
+            this.sell = sell;
+            this.number = number;
+            this.userId = userId;
         }
     }
 
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<SaleBean> sellOuts;
+
     }
 }

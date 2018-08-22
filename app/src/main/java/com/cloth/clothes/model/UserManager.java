@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
 import com.cloth.kernel.base.utils.SharedUtil;
 
-public class UserManager {
+import java.io.Serializable;
+
+public class UserManager implements Serializable{
 
     private final static String USER_INFO = "user_info";
 
@@ -52,7 +54,7 @@ public class UserManager {
         dataRepository.saveLocalData(USER_INFO, JSON.toJSONString(user));
     }
 
-    public static class User {
+    public static class User implements Serializable{
         public long role;
         public String name;
         public String sex;

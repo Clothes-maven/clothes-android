@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.HomeActivity;
+import com.cloth.clothes.login.LoginActivity;
 import com.cloth.clothes.role.RoleActivity;
 import com.cloth.kernel.service.LcRouterWrapper;
 
@@ -17,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        RoleActivity.jump();
+        LoginActivity.jump();
         finish();
     }
 }

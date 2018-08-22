@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="back">#ded7d7</color>
     <color name="line">#c1bfbf</color>
     <color name="text_color_999">#999999</color>
     <color name="text_color_666">#666666</color>
     <color name="text_color_333">#333333</color>
     <color name="text_fix_enable">#FFE14B4B</color>
+    <color name="green">#155c54</color>
+    <color name="gray">#FF848787</color>
 </resources>

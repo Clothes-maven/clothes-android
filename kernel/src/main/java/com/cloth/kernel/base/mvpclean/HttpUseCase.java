@@ -1,9 +1,8 @@
-package com.cloth.clothes.common.http;
+package com.cloth.kernel.base.mvpclean;
 
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 
-import com.cloth.kernel.base.mvpclean.UseCase;
 import com.cloth.kernel.service.http.model.BaseApiRequest;
 import com.cloth.kernel.service.http.model.BaseResponse;
 

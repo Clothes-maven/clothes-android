@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:minWidth="@dimen/normal_30dp"
             android:gravity="center"
-            android:text="all"
             android:hint="人名/拼音"/>
         <TextView
             android:id="@+id/fragment_sale_list_find_tv"
@@ -54,12 +53,20 @@
             android:paddingTop="@dimen/normal_10dp"
             android:paddingBottom="@dimen/normal_10dp"
             android:layout_marginLeft="@dimen/normal_20dp"
+            android:drawableLeft="@drawable/ic_find"
+            android:background="@drawable/ic_find_backg"
+            android:gravity="right"
             android:text="查"/>
     </LinearLayout>
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/fragment_sale_list_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_sell_list_salelist_rc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

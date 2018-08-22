@@ -1,6 +1,8 @@
 package com.cloth.clothes.login;
 
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.view.KeyEvent;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -29,6 +31,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
         LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(LoginActivity.PATH, bundle);
     }
 
+    public static void jump(){
+        LcRouterWrapper.getLcRouterWrapper().jumpActWithPath(LoginActivity.PATH);
+    }
+
     private @Role.ROLE
     long mRole;
     @BindView(R.id.activity_login_name_et)
@@ -36,6 +42,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
 
     @BindView(R.id.activity_login_pass_et)
     EditText mPass;
+    @BindView(R.id.activity_login_remember_cb)
+    AppCompatCheckBox mRemember;
 
     private LoginContract.IPresenter mPresenter;
 
@@ -50,6 +58,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
         if (bundle != null) {
             mRole = bundle.getLong(ROLE);
         }
+        mName.setSelection(mName.getText().length());
         mPresenter = new LoginPresenter(this, UseCaseHandler.getInstance(),
                 new HttpLoginUseCase(BaseHttpRepository.getBaseHttpRepository(),
                         LcBaseDataRepository.getLcBaseRepository()));
@@ -57,7 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
 
     @OnClick(R.id.activity_login_login_img)
     public void loginImg() {
-        mPresenter.login(mName.getText().toString().trim(), mPass.getText().toString().trim());
+        mPresenter.login(mName.getText().toString().trim(), mPass.getText().toString().trim(),mRemember.isChecked());
     }
 
     @Override
@@ -69,6 +78,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
     @Override
     public void toastStr(String msg) {
         ToastUtil.showShortMsg(this, msg);
+    }
+
+    @Override
+    public void setUserPass(String user, String pass) {
+        mRemember.setChecked(true);
+        mName.setText(user);
+        mPass.setText(pass);
     }
 
 }

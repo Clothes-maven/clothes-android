@@ -1,4 +1,4 @@
-package com.cloth.clothes.detail;
+package com.cloth.clothes.clothesdetail;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -17,7 +17,6 @@ import com.cloth.kernel.service.DialogWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static com.cloth.clothes.utils.StringUtils.isDouble;
 import static com.cloth.clothes.utils.StringUtils.isInteger;
@@ -28,22 +27,34 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
     private List<Item> mItemList;
     private Context mContext;
     private ClothesBean mClothesBean;
+    private boolean enabled;
 
-    public DetailClothesAdapter(Context context, ClothesBean clothesBean,boolean enabled) {
+    public DetailClothesAdapter(Context context, ClothesBean clothesBean,boolean enabled){
         this.mContext  = context;
         mItemList = new ArrayList<>();
         this.mClothesBean = clothesBean;
+        this.enabled = enabled;
         initList(context, clothesBean,enabled);
     }
 
+    public void refresh(ClothesBean clothesBean) {
+       initList(mContext,clothesBean,enabled);
+       notifyDataSetChanged();
+    }
+
     public ClothesBean getClothesBean() {
+        boolean isHttp = true;
         for (int i = 0; i < mItemList.size(); i++) {
-            setValue(mItemList.get(i),i);
+           isHttp = setValue(mItemList.get(i),i);
+        }
+        if (!isHttp) {
+            return null;
         }
         return mClothesBean;
     }
 
     public void setEnable(boolean enable) {
+        this.enabled = enable;
         for (Item item : mItemList) {
             item.enabled = enable;
         }
@@ -91,6 +102,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
     }
 
     private void initList(Context context, ClothesBean clothesBean,boolean enabled) {
+        mItemList.clear();
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_name), clothesBean.name,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_feature), clothesBean.feature,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_brand), clothesBean.brand,enabled));
@@ -105,7 +117,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesBean.number),enabled));
     }
 
-    private void setValue(Item item,int postion) {
+    private boolean setValue(Item item,int postion) {
         switch (postion) {
             case 0:
                 mClothesBean.name = item.value;
@@ -124,6 +136,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
                     mClothesBean.size = Double.valueOf(item.value);
                 } else {
                     DialogWrapper.tipWarning(mContext,"尺码需要填写数字");
+                    return false;
                 }
                 break;
             case 5:
@@ -143,6 +156,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
                     mClothesBean.cost = Double.valueOf(item.value);
                 } else {
                     DialogWrapper.tipWarning(mContext,"原价需要填写数字");
+                    return false;
                 }
                 break;
             case 10:
@@ -150,16 +164,19 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
                     mClothesBean.profit = Double.valueOf(item.value);
                 } else {
                     DialogWrapper.tipWarning(mContext,"利润需要填写数字");
+                    return false;
                 }
                 break;
             case 11:
                 if (isInteger(item.value)) {
                     mClothesBean.number = Long.valueOf(item.value);
                 } else {
-                    DialogWrapper.tipWarning(mContext,"数量需要填写数字");
+                    DialogWrapper.tipWarning(mContext,"剩余数量需要填写数字");
+                    return false;
                 }
                 break;
         }
+        return true;
     }
 
 

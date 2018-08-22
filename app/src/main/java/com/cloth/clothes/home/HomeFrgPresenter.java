@@ -8,8 +8,6 @@ import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.base.mvpclean.UseCase;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
 
-import java.text.SimpleDateFormat;
-
 public class HomeFrgPresenter implements HomeContract.IPresenter{
 
     private final UseCaseHandler mUseCaseHandler;
@@ -39,16 +37,16 @@ public class HomeFrgPresenter implements HomeContract.IPresenter{
     }
 
     @Override
-    public void saleList(HomeContract.ISaleView iSaleView,String time) {
-        mUseCaseHandler.execute(mSaleListUseCase, new HttpSaleListUseCase.RequestValue(time), new UseCase.UseCaseCallback<HttpSaleListUseCase.ResponseValue>() {
+    public void saleList(final HomeContract.ISaleView iSaleView, String time,String name) {
+        mUseCaseHandler.execute(mSaleListUseCase, new HttpSaleListUseCase.RequestValue(time, name), new UseCase.UseCaseCallback<HttpSaleListUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpSaleListUseCase.ResponseValue response) {
-
+                iSaleView.success(response.sellOuts);
             }
 
             @Override
             public void onError(int code, String msg) {
-
+                iSaleView.error(msg);
             }
         });
     }
