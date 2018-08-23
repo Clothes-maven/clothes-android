@@ -13,7 +13,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">设置</string>
 
-    <string name="clothes_name">型号:</string>
+    <string name="clothes_name">类型:</string>
     <string name="clothes_feature">特征/属性:</string>
     <string name="clothes_brand">品牌:</string>
     <string name="clothes_type">男/女装:</string>
@@ -21,11 +21,13 @@
     <string name="clothes_texture">材质:</string>
     <string name="clothes_collar">领型:</string>
     <string name="clothes_sleeve">袖长:</string>
-    <string name="clothes_batch">批次:</string>
+    <string name="clothes_batch">货号:</string>
     <string name="clothes_cost">原价:</string>
     <string name="clothes_sale">卖价:</string>
     <string name="clothes_profit">单品利润:</string>
     <string name="clothes_number">剩余数量:</string>
     <string name="clothes_sale_name">店员:</string>
     <string name="clothes_sale_time">卖出时间:</string>
+    <string name="clothes_color">颜色:</string>
+    <string name="clothes_store">店铺:</string>
 </resources>

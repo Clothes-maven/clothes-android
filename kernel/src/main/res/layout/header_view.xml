@@ -33,7 +33,7 @@
         android:layout_marginRight="20dp"
         android:text="确认"
         android:onClick="onRightClick"
-        android:visibility="visible"
+        android:visibility="gone"
         android:textColor="@android:color/white"
         android:textSize="@dimen/normal_header_text_size"/>
 </RelativeLayout>

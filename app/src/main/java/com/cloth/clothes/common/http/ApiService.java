@@ -7,6 +7,7 @@ import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
+import com.cloth.clothes.storelist.domain.usecase.HttpStoreListUseCase;
 import com.cloth.kernel.service.http.model.BaseResponse;
 
 import io.reactivex.Observable;
@@ -33,4 +34,6 @@ public interface ApiService {
 
     @POST("/sellout/sell")
     Observable<BaseResponse<HttpSellClothesUseCase.ResponseValue>> sellClothes(@Body HttpSellClothesUseCase.RequestValue body);
+    @POST("/sellout/sell")
+    Observable<BaseResponse<HttpStoreListUseCase.ResponseValue>> getSotreList(@Body HttpStoreListUseCase.RequestValue body);
 }

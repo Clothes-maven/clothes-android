@@ -88,12 +88,9 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
 
     @Override
     public void refresh(List<ClothesBean> clothBeans, boolean isSuccess) {
-        if (clothBeans ==null) return;
-
         mRefreshLayout.finishRefresh(isSuccess);
         mRefreshLayout.finishLoadMore(isSuccess);
-//        if (!isSuccess)
-//            return;
+        if (clothBeans ==null) return;
         if (mHomeAdapter ==null) {
             mHomeAdapter = new StoreAdapter(clothBeans);
             mRecyclerView.setAdapter(mHomeAdapter);

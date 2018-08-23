@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".storelist.StoreListActivity">
+
+    <include layout="@layout/header_view"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/activity_store_list_size_ed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="尺码"
+            android:minWidth="@dimen/normal_50dp"
+            android:text=""/>
+
+        <EditText
+            android:id="@+id/activity_store_list_color_ed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_10dp"
+            android:layout_marginRight="@dimen/normal_10dp"
+            android:gravity="center"
+            android:hint="颜色"
+            android:minWidth="@dimen/normal_50dp"
+            android:text=""/>
+
+        <EditText
+            android:id="@+id/activity_store_list_store_ed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/normal_10dp"
+            android:gravity="center"
+            android:hint="店铺"
+            android:minWidth="@dimen/normal_50dp"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/activity_store_list_find_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_20dp"
+            android:background="@drawable/ic_find_backg"
+            android:drawableLeft="@drawable/ic_find"
+            android:gravity="left"
+            android:paddingBottom="@dimen/normal_10dp"
+            android:paddingLeft="@dimen/normal_20dp"
+            android:paddingRight="@dimen/normal_20dp"
+            android:paddingTop="@dimen/normal_10dp"
+            android:text="查"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_store_list_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

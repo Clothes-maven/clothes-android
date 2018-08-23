@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/normal_10dp"
+    android:paddingBottom="@dimen/normal_10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:text="@string/clothes_size"/>
+
+    <TextView
+        android:id="@+id/actitity_store_list_adapter_item_size_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="170"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:text="@string/clothes_color"/>
+
+    <TextView
+        android:id="@+id/actitity_store_list_adapter_item_color_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="白色"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:text="@string/clothes_store"/>
+
+    <TextView
+        android:id="@+id/actitity_store_list_adapter_item_store_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="万达"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:text="@string/clothes_number"/>
+
+    <TextView
+        android:id="@+id/actitity_store_list_adapter_item_number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123"/>
+
+
+</LinearLayout>
