@@ -35,6 +35,10 @@ public class RoleTest {
 
     @Test
     public void isPurchase() {
+        final int a = 10;
+        final int b = 20;
+        int c = Math.abs(a+b);
+        System.out.print(c);
     }
 
     @Test
@@ -46,7 +50,7 @@ public class RoleTest {
         HttpClient httpClient = new HttpClient.Builder()
                 .async(false)
                 .baseUrl("http://www.baidu.com")
-                .ipPort("10.99.40.38",8888)
+//                .ipPort("10.99.40.38",8888)
                 .build();
         httpClient.exec(ApiService.class)
                 .login(new HttpLoginUseCase.RequestValue("dd","dd"))
@@ -78,7 +82,7 @@ public class RoleTest {
     @Test
     public void fastJsonTest() {
         HttpLoginUseCase.ResponseValue  responseValue = new HttpLoginUseCase.ResponseValue();
-        responseValue.address = "ddd";
+//        responseValue.address = "ddd";
         responseValue.phone= "2q435443654";
         HttpLoginUseCase.RequestValue requestValue = new HttpLoginUseCase.RequestValue("11","33");
         System.out.print(JSON.toJSONString(requestValue));

@@ -1,6 +1,8 @@
 package com.cloth.clothes.common.http;
 
 import com.cloth.clothes.BuildConfig;
+import com.cloth.clothes.addclothes.additem.domian.usecase.HttpAddItemClothesUseCase;
+import com.cloth.clothes.addclothes.additem.domian.usecase.HttpGetStoreListUseCase;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpSellClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
@@ -34,6 +36,13 @@ public interface ApiService {
 
     @POST("/sellout/sell")
     Observable<BaseResponse<HttpSellClothesUseCase.ResponseValue>> sellClothes(@Body HttpSellClothesUseCase.RequestValue body);
-    @POST("/sellout/sell")
-    Observable<BaseResponse<HttpStoreListUseCase.ResponseValue>> getSotreList(@Body HttpStoreListUseCase.RequestValue body);
+
+    @GET("/store/getClothDetails")
+    Observable<BaseResponse<HttpStoreListUseCase.ResponseValue>> getClothesList(@Query("cid") String  cid , @Query("sid") String  sid);
+
+    @GET("/store/getClothDetails")
+    Observable<BaseResponse<HttpAddItemClothesUseCase.ResponseValue>> addItem(@Query("sid") String  sid , @Query("color") String  color,@Query("number")String number,@Query("size") String size);
+
+    @POST("/store/getClothDetails")
+    Observable<BaseResponse<HttpGetStoreListUseCase.ResponseValue>> getStoreList(@Body HttpGetStoreListUseCase.RequestValue body);
 }

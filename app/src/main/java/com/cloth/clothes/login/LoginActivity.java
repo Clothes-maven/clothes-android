@@ -17,9 +17,16 @@ import com.cloth.kernel.base.mvpclean.UseCaseHandler;
 import com.cloth.kernel.base.utils.ToastUtil;
 import com.cloth.kernel.service.LcRouterWrapper;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 登录页面
+ */
 @Route(path = LoginActivity.PATH)
 public class LoginActivity extends BaseActivity implements LoginContract.IView {
     public static final String PATH = "/main/login";
@@ -87,4 +94,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
         mPass.setText(pass);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDetach();
+    }
 }

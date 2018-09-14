@@ -19,13 +19,12 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
-import com.cloth.clothes.addclothes.AddClothesActivity;
+import com.cloth.clothes.addclothes.addbatch.AddClothesActivity;
 import com.cloth.clothes.home.homefragment.StoreFragment;
 import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.home.salelist.SaleListFragment;
 import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
 import com.cloth.clothes.model.BaseHttpRepository;
-import com.cloth.clothes.model.LcBaseDataRepository;
 import com.cloth.clothes.model.Role;
 import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.base.BaseActivity;
@@ -36,6 +35,9 @@ import com.cloth.kernel.service.LcRouterWrapper;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 主home页面
+ */
 @Route(path = HomeActivity.PATH)
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,7 +102,7 @@ public class HomeActivity extends BaseActivity
             mAddBtn.setVisibility(View.GONE);
         }
         mNameTv.setText(UserManager.getInstance().getUser().name);
-        mAddressTv.setText(UserManager.getInstance().getUser().address);
+        mAddressTv.setText(UserManager.getInstance().getUser().address.address);
 
 
         setSupportActionBar(mToolbar);

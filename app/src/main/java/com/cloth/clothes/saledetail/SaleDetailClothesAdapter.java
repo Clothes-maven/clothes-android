@@ -3,8 +3,6 @@ package com.cloth.clothes.saledetail;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +12,9 @@ import android.widget.TextView;
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
-import com.cloth.kernel.service.DialogWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.cloth.clothes.utils.StringUtils.isDouble;
-import static com.cloth.clothes.utils.StringUtils.isInteger;
 
 public class SaleDetailClothesAdapter extends RecyclerView.Adapter<SaleDetailClothesAdapter.ViewHolder> {
 
@@ -36,7 +30,7 @@ public class SaleDetailClothesAdapter extends RecyclerView.Adapter<SaleDetailClo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_clothes_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_clothes, parent, false);
         return new ViewHolder(view);
     }
 

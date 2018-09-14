@@ -9,18 +9,18 @@ import com.cloth.kernel.base.mvpclean.IBaseView;
 import java.util.List;
 
 public interface HomeContract {
-    interface IStoreView extends IBaseView<IPresenter> ,IOKEvent{
+    interface IStoreViewFrg extends IBaseView<IPresenter> ,IOKEvent{
         void refresh(List<ClothesBean> clothBeans,boolean isSuccess);
         void setPresenter(IPresenter presenter);
         void refreshItem(int position,ClothesBean clothesBean);
     }
 
     interface IPresenter extends IBasePresenter {
-        void getClothes(HomeContract.IStoreView iStoreView);
-        void saleList(HomeContract.ISaleView iSaleView,String time,String name);
+        void getClothes(HomeContract.IStoreViewFrg iStoreView);
+        void saleList(HomeContract.ISaleViewFrg iSaleView,String time,String name);
     }
 
-    interface ISaleView extends IBaseView<IPresenter>{
+    interface ISaleViewFrg extends IBaseView<IPresenter>{
         void success(List<SaleBean> list);
         void error(String msg);
         void setPresenter(IPresenter presenter);

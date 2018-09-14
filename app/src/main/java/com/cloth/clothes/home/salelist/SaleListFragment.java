@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.HomeContract;
-import com.cloth.clothes.home.homefragment.StoreFragment;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
 import com.cloth.clothes.utils.StringUtils;
 import com.cloth.kernel.base.BaseFragment;
@@ -29,7 +28,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-public class SaleListFragment extends BaseFragment implements HomeContract.ISaleView {
+/**
+ * 卖出列表
+ */
+public class SaleListFragment extends BaseFragment implements HomeContract.ISaleViewFrg {
 
     public static SaleListFragment newInstance() {
         return new SaleListFragment();
@@ -106,6 +108,7 @@ public class SaleListFragment extends BaseFragment implements HomeContract.ISale
     @Override
     public void setPresenter(HomeContract.IPresenter presenter) {
         mIPresenter = presenter;
+
     }
 
     private void getSaleList() {

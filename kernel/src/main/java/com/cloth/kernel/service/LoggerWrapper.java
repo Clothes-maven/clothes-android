@@ -3,7 +3,7 @@ package com.cloth.kernel.service;
 import android.util.Log;
 
 public class LoggerWrapper {
-    private static ILog sILog = ILog.DEFULT;
+    private static ILog sILog = ILog.DEFAULT;
     private static boolean isDebug = true;
 
     public static void setILog(ILog ILog) {
@@ -50,7 +50,7 @@ public class LoggerWrapper {
         void e(String msg);
         void wtf(Throwable tr);
 
-        ILog DEFULT = new ILog() {
+        ILog DEFAULT = new ILog() {
             private static final String TAG = "ILog";
             @Override
             public void i(String msg) {

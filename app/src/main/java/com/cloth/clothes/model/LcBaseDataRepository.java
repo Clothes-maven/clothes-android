@@ -70,7 +70,7 @@ public class LcBaseDataRepository implements IDataRepository {
         } else if (defaultVal instanceof Long) {
             return (T) Long.valueOf(SharedUtil.getLong(key, (Long) defaultVal));
         } else {
-            if ((T) SharedUtil.getObject(key, defaultVal.getClass()) == null) {
+            if (SharedUtil.getObject(key, defaultVal.getClass()) == null) {
                 return defaultVal;
             }
             return (T) SharedUtil.getObject(key, defaultVal.getClass());

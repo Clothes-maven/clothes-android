@@ -14,7 +14,7 @@ import com.cloth.kernel.base.mvpclean.UseCaseHandler;
 public class DetailPresenter implements DetailContranct.IPresenter {
 
 
-    private final DetailContranct.IView mIView;
+    private  DetailContranct.IView mIView;
     private final UseCaseHandler mUseCaseHandler;
     private final HttpSellClothesUseCase mSellClothesUseCase;
     private final HttpFixClothesUseCase mHttpFixClothesUseCase;
@@ -56,5 +56,10 @@ public class DetailPresenter implements DetailContranct.IPresenter {
                 mIView.error(msg);
             }
         });
+    }
+
+    @Override
+    public void onDetach() {
+        mIView =null;
     }
 }

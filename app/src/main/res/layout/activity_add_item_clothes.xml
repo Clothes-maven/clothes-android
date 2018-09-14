@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".addclothes.additem.AddItemClothesActivity">
+    <include layout="@layout/header_view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:textSize="@dimen/middle_size"
+        android:text="颜色："/>
+    <EditText
+        android:id="@+id/activity_add_item_clothes_color_edt"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:textSize="@dimen/middle_size"
+        android:text="尺码："/>
+    <EditText
+        android:id="@+id/activity_add_item_clothes_size_edt"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:textSize="@dimen/middle_size"
+        android:text="数量："/>
+    <EditText
+        android:id="@+id/activity_add_item_clothes_number_edt"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:textSize="@dimen/middle_size"
+        android:text="门店："/>
+    <TextView
+        android:id="@+id/activity_add_item_clothes_select_tv"
+        android:layout_marginTop="@dimen/normal_10dp"
+        android:layout_marginLeft="@dimen/normal_10dp"
+        android:padding="@dimen/normal_5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/middle_size"
+        android:hint="请选择门店"
+        />
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.cloth.clothes.model;
 
 import com.alibaba.fastjson.JSON;
+import com.cloth.clothes.home.domain.model.StoreBean;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
 import com.cloth.kernel.base.utils.SharedUtil;
 
@@ -12,7 +13,6 @@ public class UserManager implements Serializable{
 
     private volatile static UserManager sUserManager;
     private User mUser;
-
 
     public static UserManager getInstance() {
         if (sUserManager ==null) {
@@ -33,6 +33,10 @@ public class UserManager implements Serializable{
             return mUser.id;
         }
         return 0;
+    }
+
+    public boolean isOwner() {
+        return Role.isOwner(getId());
     }
 
     public long getRole() {
@@ -58,7 +62,7 @@ public class UserManager implements Serializable{
         public long role;
         public String name;
         public String sex;
-        public String address;
+        public StoreBean address;
         public String phone;
         public String qq;
         public long id;

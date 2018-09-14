@@ -30,13 +30,15 @@
         </activity>
         <activity android:name=".role.RoleActivity">
         </activity>
-        <activity android:name=".addclothes.AddClothesActivity">
+        <activity android:name=".addclothes.addbatch.AddClothesActivity">
         </activity>
         <activity android:name=".clothesdetail.DetailActivity">
         </activity>
         <activity android:name=".saledetail.SaleDetailActivity">
         </activity>
         <activity android:name=".storelist.StoreListActivity">
+        </activity>
+        <activity android:name=".addclothes.additem.AddItemClothesActivity">
         </activity>
     </application>
 

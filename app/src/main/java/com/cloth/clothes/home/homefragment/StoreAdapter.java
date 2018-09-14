@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cloth.clothes.R;
 import com.cloth.clothes.clothesdetail.DetailActivity;
 import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.storelist.StoreListActivity;
 
 import java.util.List;
 
@@ -51,7 +52,8 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DetailActivity.jump(mClothBeanList.get(holder.getAdapterPosition()),holder.getAdapterPosition());
+                StoreListActivity.jump(null);
+//                DetailActivity.jump(mClothBeanList.get(holder.getAdapterPosition()),holder.getAdapterPosition());
             }
         });
 

@@ -3,6 +3,7 @@ package com.cloth.clothes.login.usecase;
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
+import com.cloth.clothes.home.domain.model.StoreBean;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.base.mvpclean.IDataRepository;
@@ -86,7 +87,7 @@ public class HttpLoginUseCase extends HttpUseCase<HttpLoginUseCase.RequestValue,
         public long role;
         public String name;
         public String sex;
-        public String address;
+        public StoreBean address;
         public String phone;
         public String qq;
         public long id;

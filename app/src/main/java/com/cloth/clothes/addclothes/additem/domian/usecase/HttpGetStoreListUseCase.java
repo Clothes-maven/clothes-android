@@ -1,9 +1,9 @@
-package com.cloth.clothes.storelist.domain.usecase;
+package com.cloth.clothes.addclothes.additem.domian.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.storelist.domain.model.NumberModel;
+import com.cloth.clothes.home.domain.model.StoreBean;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;
@@ -16,18 +16,18 @@ import io.reactivex.Observable;
 /**
  * 商品数量列表
  */
-public class HttpStoreListUseCase extends HttpUseCase<HttpStoreListUseCase.RequestValue, HttpStoreListUseCase.ResponseValue> {
+public class HttpGetStoreListUseCase extends HttpUseCase<HttpGetStoreListUseCase.RequestValue, HttpGetStoreListUseCase.ResponseValue> {
 
 
     private IHttpRepository mIHttpRepository;
 
-    public HttpStoreListUseCase(@NonNull IHttpRepository iHttpRepository) {
+    public HttpGetStoreListUseCase(@NonNull IHttpRepository iHttpRepository) {
         this.mIHttpRepository = iHttpRepository;
     }
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
-        return mIHttpRepository.exec(ApiService.class).getClothesList(requestValue.getCid(),requestValue.getSid());
+        return mIHttpRepository.exec(ApiService.class).getStoreList(requestValue);
     }
 
     @Override
@@ -51,24 +51,14 @@ public class HttpStoreListUseCase extends HttpUseCase<HttpStoreListUseCase.Reque
     }
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
-        private final String cid;
-        private final String sid;
+        private final String uid;
 
-        public String getCid() {
-            return cid;
-        }
-
-        public String getSid() {
-            return sid;
-        }
-
-        public RequestValue(String cid, String sid) {
-            this.cid = cid;
-            this.sid = sid;
+        public RequestValue(String uid) {
+            this.uid = uid;
         }
     }
 
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<NumberModel> clothdetails;
+        public List<StoreBean> stores;
     }
 }

@@ -1,4 +1,4 @@
-package com.cloth.clothes.addclothes;
+package com.cloth.clothes.addclothes.addbatch;
 
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.IBasePresenter;

@@ -10,6 +10,10 @@ import com.cloth.clothes.login.LoginActivity;
 import com.cloth.clothes.role.RoleActivity;
 import com.cloth.kernel.service.LcRouterWrapper;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 @Route(path = SplashActivity.PATH)
 public class SplashActivity extends AppCompatActivity {
     public static final String  PATH = "/main/splash";
@@ -19,6 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         LoginActivity.jump();
+
+
         finish();
     }
 }

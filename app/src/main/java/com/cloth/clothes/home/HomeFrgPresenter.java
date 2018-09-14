@@ -22,7 +22,7 @@ public class HomeFrgPresenter implements HomeContract.IPresenter{
     }
 
     @Override
-    public void getClothes(final HomeContract.IStoreView iStoreView){
+    public void getClothes(final HomeContract.IStoreViewFrg iStoreView){
         mUseCaseHandler.execute(mGetClothesUseCase, new HttpGetClothesUseCase.RequestValue(UserManager.getInstance().getId(), 10, 1), new UseCase.UseCaseCallback<HttpGetClothesUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpGetClothesUseCase.ResponseValue response) {
@@ -37,7 +37,7 @@ public class HomeFrgPresenter implements HomeContract.IPresenter{
     }
 
     @Override
-    public void saleList(final HomeContract.ISaleView iSaleView, String time,String name) {
+    public void saleList(final HomeContract.ISaleViewFrg iSaleView, String time, String name) {
         mUseCaseHandler.execute(mSaleListUseCase, new HttpSaleListUseCase.RequestValue(time, name), new UseCase.UseCaseCallback<HttpSaleListUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpSaleListUseCase.ResponseValue response) {
@@ -49,5 +49,11 @@ public class HomeFrgPresenter implements HomeContract.IPresenter{
                 iSaleView.error(msg);
             }
         });
+    }
+
+
+    @Override
+    public void onDetach() {
+
     }
 }

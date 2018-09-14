@@ -132,7 +132,7 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
     @Override
     public void finish() {
         super.finish();
-        LcEventBusWrapper.getInstance().doEvent(HomeContract.IStoreView.class).refreshItem(mPosition,clothesBean);
+        LcEventBusWrapper.getInstance().doEvent(HomeContract.IStoreViewFrg.class).refreshItem(mPosition,clothesBean);
     }
 
     @Override
@@ -157,4 +157,9 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
         DialogWrapper.tipErrorDialog(this,msg);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mIPresenter.onDetach();
+    }
 }

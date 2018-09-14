@@ -20,7 +20,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
-public class StoreFragment extends BaseFragment implements HomeContract.IStoreView {
+/**
+ * 商品主页
+ */
+public class StoreFragment extends BaseFragment implements HomeContract.IStoreViewFrg {
 
 
     public StoreFragment() {

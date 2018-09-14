@@ -43,8 +43,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
-//            buildConfigField "String", "BASE_URL", "\"http://10.99.24.159:8081\""
-            buildConfigField "String", "BASE_URL", "\"http://10.99.40.38:8081\""
+            buildConfigField "String", "BASE_URL", "\"http://10.99.24.159:8081\""
+//            buildConfigField "String", "BASE_URL", "\"http://10.99.40.38:8081\""
             buildConfigField "Boolean", "LOG_DEBUG", 'true'//日志输出
         }
         release {

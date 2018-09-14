@@ -1,4 +1,4 @@
-package com.cloth.clothes.addclothes;
+package com.cloth.clothes.addclothes.addbatch;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -76,5 +76,11 @@ public class AddClothesActivity extends BaseActivity implements AddContract.IVie
     public void error(String msg) {
         DialogWrapper.dismissWaitDialog();
         DialogWrapper.tipErrorDialog(this,msg);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mIPresenter.onDetach();
     }
 }

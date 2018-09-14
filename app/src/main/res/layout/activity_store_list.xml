@@ -9,23 +9,27 @@
 
     <include layout="@layout/header_view"/>
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_marginTop="@dimen/normal_5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
 
-        <EditText
-            android:id="@+id/activity_store_list_size_ed"
+        <TextView
+            android:id="@+id/activity_store_list_size_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/order_list_selector"
             android:gravity="center"
             android:hint="尺码"
             android:minWidth="@dimen/normal_50dp"
+            android:layout_centerVertical="true"
             android:text=""/>
 
-        <EditText
-            android:id="@+id/activity_store_list_color_ed"
+        <TextView
+            android:id="@+id/activity_store_list_color_tv"
+            android:layout_toRightOf="@+id/activity_store_list_size_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/normal_10dp"
@@ -33,16 +37,19 @@
             android:gravity="center"
             android:hint="颜色"
             android:minWidth="@dimen/normal_50dp"
+            android:layout_centerVertical="true"
             android:text=""/>
 
-        <EditText
-            android:id="@+id/activity_store_list_store_ed"
+        <TextView
+            android:id="@+id/activity_store_list_store_tv"
+            android:layout_toRightOf="@+id/activity_store_list_color_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/normal_10dp"
             android:gravity="center"
             android:hint="店铺"
             android:minWidth="@dimen/normal_50dp"
+            android:layout_centerVertical="true"
             android:text=""/>
 
         <TextView
@@ -52,16 +59,25 @@
             android:layout_marginLeft="@dimen/normal_20dp"
             android:background="@drawable/ic_find_backg"
             android:drawableLeft="@drawable/ic_find"
+            android:layout_alignParentRight="true"
             android:gravity="left"
             android:paddingBottom="@dimen/normal_10dp"
             android:paddingLeft="@dimen/normal_20dp"
             android:paddingRight="@dimen/normal_20dp"
             android:paddingTop="@dimen/normal_10dp"
-            android:text="查"/>
-    </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_store_list_rcv"
+            android:layout_centerVertical="true"
+            android:text="筛选"/>
+    </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/activity_store_list_refresh_layout_rf"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_store_list_rcv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

@@ -64,7 +64,7 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_clothes_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_clothes, parent, false);
         return new ViewHolder(view);
     }
 
