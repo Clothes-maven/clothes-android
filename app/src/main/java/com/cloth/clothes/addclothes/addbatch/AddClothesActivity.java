@@ -9,12 +9,12 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
-import com.cloth.clothes.clothesdetail.DetailClothesAdapter;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.model.BaseHttpRepository;
 import com.cloth.kernel.base.BaseActivity;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
+import com.cloth.kernel.base.utils.ToastUtil;
 import com.cloth.kernel.service.DialogWrapper;
 import com.cloth.kernel.service.LcRouterWrapper;
 
@@ -30,7 +30,7 @@ public class AddClothesActivity extends BaseActivity implements AddContract.IVie
 
     @BindView(R.id.activity_add_clothes_recyl)
     RecyclerView mRecyclerView;
-    private DetailClothesAdapter mClothesAdapter;
+    private AddClothesAdapter mClothesAdapter;
     private AddContract.IPresenter mIPresenter;
 
     @Override
@@ -48,7 +48,7 @@ public class AddClothesActivity extends BaseActivity implements AddContract.IVie
     protected void init() {
         switchRightTv(View.VISIBLE,"添加");
         mIPresenter = new AddPresenter(this, UseCaseHandler.getInstance(), new HttpFixClothesUseCase(BaseHttpRepository.getBaseHttpRepository()));
-        mClothesAdapter = new DetailClothesAdapter(this,new ClothesBean(),true);
+        mClothesAdapter = new AddClothesAdapter(this,new ClothesBean());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         DividerItemDecoration decoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decoration);
@@ -68,7 +68,7 @@ public class AddClothesActivity extends BaseActivity implements AddContract.IVie
     @Override
     public void success() {
         DialogWrapper.dismissWaitDialog();
-        DialogWrapper.tipSuccessDialog(this,"添加成功");
+        ToastUtil.showShortMsg(this,"添加成功");
         finish();
     }
 

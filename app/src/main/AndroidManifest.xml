@@ -32,11 +32,12 @@
         </activity>
         <activity android:name=".addclothes.addbatch.AddClothesActivity">
         </activity>
-        <activity android:name=".clothesdetail.DetailActivity">
+        <activity android:name=".clothesdetail.DetailActivity"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".saledetail.SaleDetailActivity">
         </activity>
-        <activity android:name=".storelist.StoreListActivity">
+        <activity android:name=".clothessecondlist.ClothesSecondActivity">
         </activity>
         <activity android:name=".addclothes.additem.AddItemClothesActivity">
         </activity>

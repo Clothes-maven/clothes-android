@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:text="长领单独的点点滴滴"
+            android:text="衣服name"
             android:textSize="@dimen/high_size"/>
 
         <TextView
@@ -30,10 +30,10 @@
             android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/clothes_size"
+            android:text="@string/clothes_brand"
             android:textSize="@dimen/low_size"/>
         <TextView
-            android:id="@+id/home_fragment_adapter_item_size_tv"
+            android:id="@+id/home_fragment_adapter_item_brand_tv"
             android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
             android:layout_toRightOf="@+id/_size"
             android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/_batch"
             android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
-            android:layout_toRightOf="@+id/home_fragment_adapter_item_size_tv"
+            android:layout_toRightOf="@+id/home_fragment_adapter_item_brand_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -66,11 +66,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="@string/clothes_number"
+            android:text="@string/clothes_type"
             android:textSize="@dimen/low_size"/>
 
         <TextView
-            android:id="@+id/home_fragment_adapter_item_number_tv"
+            android:id="@+id/home_fragment_adapter_item_type_tv"
             android:layout_below="@+id/home_fragment_adapter_item_desc_tv"
             android:layout_toRightOf="@+id/_number"
             android:layout_width="wrap_content"

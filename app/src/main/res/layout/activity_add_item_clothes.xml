@@ -29,7 +29,8 @@
         android:id="@+id/activity_add_item_clothes_size_edt"
         android:layout_marginLeft="@dimen/normal_10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +41,8 @@
         android:id="@+id/activity_add_item_clothes_number_edt"
         android:layout_marginLeft="@dimen/normal_10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

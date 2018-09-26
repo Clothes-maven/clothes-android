@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface HomeContract {
     interface IStoreViewFrg extends IBaseView<IPresenter> ,IOKEvent{
-        void refresh(List<ClothesBean> clothBeans,boolean isSuccess);
+        void refresh(List<ClothesBean> clothBeans,boolean isSuccess,String msg);
         void setPresenter(IPresenter presenter);
         void refreshItem(int position,ClothesBean clothesBean);
     }
@@ -18,6 +18,7 @@ public interface HomeContract {
     interface IPresenter extends IBasePresenter {
         void getClothes(HomeContract.IStoreViewFrg iStoreView);
         void saleList(HomeContract.ISaleViewFrg iSaleView,String time,String name);
+        void deleteClothes(HomeContract.IStoreViewFrg iStoreView,String cid,int position);
     }
 
     interface ISaleViewFrg extends IBaseView<IPresenter>{

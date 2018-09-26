@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.home.salelist.domain.model.SaleBean;
+import com.cloth.clothes.clothessecondlist.domain.model.ClothesSecondModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,9 @@ public class SaleDetailClothesAdapter extends RecyclerView.Adapter<SaleDetailClo
 
     private List<Item> mItemList;
 
-    public SaleDetailClothesAdapter(Context context, SaleBean clothesBean){
+    public SaleDetailClothesAdapter(Context context, SaleBean saleBean){
         mItemList = new ArrayList<>();
-        initList(context, clothesBean,false);
+        initList(context, saleBean,false);
     }
 
 
@@ -51,21 +52,25 @@ public class SaleDetailClothesAdapter extends RecyclerView.Adapter<SaleDetailClo
     }
 
     private void initList(Context context, SaleBean saleBean,boolean enabled) {
-        ClothesBean clothesBean = saleBean.clothes;
+        ClothesSecondModel clothesSecondModel = saleBean.clothdetail;
+        ClothesBean clothesBean = saleBean.clothdetail.clothe;
+
         mItemList.clear();
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_name), clothesBean.name,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_feature), clothesBean.feature,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_brand), clothesBean.brand,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_type), clothesBean.type,enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(clothesBean.size),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(clothesSecondModel.size),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_color), String.valueOf(clothesSecondModel.color),enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_texture), clothesBean.texture,enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.collar,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.couar,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_sleeve), clothesBean.sleeve,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_batch), clothesBean.batch,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_cost), String.valueOf(clothesBean.cost),enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_profit), String.valueOf(clothesBean.profit),enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesBean.number),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesSecondModel.number),enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_sale_name), String.valueOf(saleBean.user.name),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_store), String.valueOf(clothesSecondModel.store.name),enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_sale_time), String.valueOf(saleBean.createDate),enabled));
     }
 

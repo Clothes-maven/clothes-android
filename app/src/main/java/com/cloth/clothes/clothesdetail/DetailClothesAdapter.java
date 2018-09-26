@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.cloth.clothes.R;
 import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.clothessecondlist.domain.model.ClothesSecondModel;
+import com.cloth.clothes.model.UserManager;
 import com.cloth.kernel.service.DialogWrapper;
 
 import java.util.ArrayList;
@@ -26,19 +28,24 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
 
     private List<Item> mItemList;
     private Context mContext;
+    private ClothesSecondModel mNumberModel;
     private ClothesBean mClothesBean;
-    private boolean enabled;
+    private boolean enabled ;
 
-    public DetailClothesAdapter(Context context, ClothesBean clothesBean,boolean enabled){
+    public DetailClothesAdapter(Context context, ClothesSecondModel numberModel, boolean enabled ){
         this.mContext  = context;
         mItemList = new ArrayList<>();
-        this.mClothesBean = clothesBean;
+        this.mNumberModel = numberModel;
+        this.mClothesBean = numberModel.clothe;
+        if (!UserManager.getInstance().isOwner()) {
+            mClothesBean.cost = 0;
+        }
         this.enabled = enabled;
-        initList(context, clothesBean,enabled);
+        initList(context, numberModel,enabled);
     }
 
-    public void refresh(ClothesBean clothesBean) {
-       initList(mContext,clothesBean,enabled);
+    public void refresh(ClothesSecondModel numberModel) {
+       initList(mContext,numberModel,enabled);
        notifyDataSetChanged();
     }
 
@@ -101,20 +108,22 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
         return mItemList.size();
     }
 
-    private void initList(Context context, ClothesBean clothesBean,boolean enabled) {
+    private void initList(Context context, ClothesSecondModel numberModel, boolean enabled) {
+        ClothesBean clothesBean  = numberModel.clothe;
         mItemList.clear();
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_name), clothesBean.name,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_feature), clothesBean.feature,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_brand), clothesBean.brand,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_type), clothesBean.type,enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(clothesBean.size),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_size), String.valueOf(numberModel.size),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_color), String.valueOf(numberModel.color),enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_texture), clothesBean.texture,enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.collar,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_collar), clothesBean.couar,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_sleeve), clothesBean.sleeve,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_batch), clothesBean.batch,enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_store), numberModel.store.name,enabled));
         mItemList.add(new Item(context.getResources().getString(R.string.clothes_cost), String.valueOf(clothesBean.cost),enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_profit), String.valueOf(clothesBean.profit),enabled));
-        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(clothesBean.number),enabled));
+        mItemList.add(new Item(context.getResources().getString(R.string.clothes_number), String.valueOf(numberModel.number),enabled));
     }
 
     private boolean setValue(Item item,int postion) {
@@ -133,25 +142,31 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
                 break;
             case 4:
                 if (isDouble(item.value)) {
-                    mClothesBean.size = Double.valueOf(item.value);
+                    mNumberModel.size = item.value;
                 } else {
                     DialogWrapper.tipWarning(mContext,"尺码需要填写数字");
                     return false;
                 }
                 break;
             case 5:
-                mClothesBean.texture = item.value;
+                mNumberModel.color = item.value;
                 break;
             case 6:
-                mClothesBean.collar = item.value;
+                mClothesBean.texture = item.value;
                 break;
             case 7:
-                mClothesBean.sleeve = item.value;
+                mClothesBean.couar = item.value;
                 break;
             case 8:
-                mClothesBean.batch = item.value;
+                mClothesBean.sleeve = item.value;
                 break;
             case 9:
+                mClothesBean.batch = item.value;
+                break;
+            case 10:
+                mNumberModel.store.name = item.value;
+                break;
+            case 11:
                 if (isDouble(item.value)) {
                     mClothesBean.cost = Double.valueOf(item.value);
                 } else {
@@ -159,17 +174,17 @@ public class DetailClothesAdapter extends RecyclerView.Adapter<DetailClothesAdap
                     return false;
                 }
                 break;
-            case 10:
-                if (isDouble(item.value)) {
-                    mClothesBean.profit = Double.valueOf(item.value);
-                } else {
-                    DialogWrapper.tipWarning(mContext,"利润需要填写数字");
-                    return false;
-                }
-                break;
-            case 11:
+//            case 12:
+//                if (isDouble(item.value)) {
+//                    mClothesBean.profit = Double.valueOf(item.value);
+//                } else {
+//                    DialogWrapper.tipWarning(mContext,"利润需要填写数字");
+//                    return false;
+//                }
+//                break;
+            case 12:
                 if (isInteger(item.value)) {
-                    mClothesBean.number = Long.valueOf(item.value);
+                    mNumberModel.number = Long.parseLong(item.value);
                 } else {
                     DialogWrapper.tipWarning(mContext,"剩余数量需要填写数字");
                     return false;

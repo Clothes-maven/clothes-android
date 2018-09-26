@@ -1,33 +1,30 @@
-package com.cloth.clothes.addclothes.additem.domian.usecase;
+package com.cloth.clothes.clothessecondlist.domain.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.home.domain.model.StoreBean;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;
 import com.cloth.kernel.service.http.model.BaseResponse;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
 /**
  * 商品数量列表
  */
-public class HttpAddItemClothesUseCase extends HttpUseCase<HttpAddItemClothesUseCase.RequestValue, HttpAddItemClothesUseCase.ResponseValue> {
+public class HttpDeleteItemUseCase extends HttpUseCase<HttpDeleteItemUseCase.RequestValue, HttpDeleteItemUseCase.ResponseValue> {
 
 
     private IHttpRepository mIHttpRepository;
 
-    public HttpAddItemClothesUseCase(@NonNull IHttpRepository iHttpRepository) {
+    public HttpDeleteItemUseCase(@NonNull IHttpRepository iHttpRepository) {
         this.mIHttpRepository = iHttpRepository;
     }
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
-        return mIHttpRepository.exec(ApiService.class).addClothesItem(requestValue);
+        return mIHttpRepository.exec(ApiService.class).deleteClothesItem(requestValue.getCid());
     }
 
     @Override
@@ -51,21 +48,17 @@ public class HttpAddItemClothesUseCase extends HttpUseCase<HttpAddItemClothesUse
     }
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
-        public  String size;
-        public  String color;
-        public  String number;
-        public  String clotheId;
-        public  String storeId;
+        private final String cid;
 
-        public RequestValue(String size, String color, String number, String clotheId, String storeId) {
-            this.size = size;
-            this.color = color;
-            this.number = number;
-            this.clotheId = clotheId;
-            this.storeId = storeId;
+        public String getCid() {
+            return cid;
+        }
+
+        public RequestValue(String cid) {
+            this.cid = cid;
         }
     }
+
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<StoreBean> stores;
     }
 }

@@ -1,4 +1,4 @@
-package com.cloth.clothes.storelist.weiget;
+package com.cloth.clothes.clothessecondlist.widget;
 
 import android.content.Context;
 import android.content.DialogInterface;

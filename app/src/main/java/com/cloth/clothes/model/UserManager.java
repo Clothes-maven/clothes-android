@@ -36,7 +36,7 @@ public class UserManager implements Serializable{
     }
 
     public boolean isOwner() {
-        return Role.isOwner(getId());
+        return Role.isOwner(getRole());
     }
 
     public long getRole() {

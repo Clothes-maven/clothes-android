@@ -1,6 +1,7 @@
 package com.cloth.clothes.addclothes.additem;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,7 +13,8 @@ import com.cloth.clothes.R;
 import com.cloth.clothes.addclothes.additem.domian.usecase.HttpAddItemClothesUseCase;
 import com.cloth.clothes.addclothes.additem.domian.usecase.HttpGetStoreListUseCase;
 import com.cloth.clothes.model.BaseHttpRepository;
-import com.cloth.clothes.storelist.weiget.SingleChoiceDialogFragment;
+import com.cloth.clothes.model.UserManager;
+import com.cloth.clothes.clothessecondlist.widget.SingleChoiceDialogFragment;
 import com.cloth.kernel.base.BaseActivity;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
 import com.cloth.kernel.base.utils.ToastUtil;
@@ -28,9 +30,12 @@ import butterknife.OnClick;
 @Route( path = AddItemClothesActivity.PATH)
 public class AddItemClothesActivity extends BaseActivity implements AddItemClothesContract.IView{
     public static final String PATH = "/main/additemclothe";
+    public static final String CLOTHES_ID = "clothes_id";
 
-    public static void jump() {
-        LcRouterWrapper.getLcRouterWrapper().jumpActWithPath(PATH);
+    public static void jump(String clothesId) {
+        Bundle bundle = new Bundle();
+        bundle.putString(CLOTHES_ID, clothesId);
+        LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(PATH,bundle);
     }
 
     @BindView(R.id.activity_add_item_clothes_color_edt)
@@ -44,6 +49,8 @@ public class AddItemClothesActivity extends BaseActivity implements AddItemCloth
 
     private AddItemClothesContract.IPresenter mIPresenter;
     private List<String> mStoreNames = new ArrayList<>();
+    private String mClothesId;
+    private int mSelectItem;
 
     @Override
     protected int getLayoutId() {
@@ -58,9 +65,10 @@ public class AddItemClothesActivity extends BaseActivity implements AddItemCloth
 
     @OnClick(R.id.activity_add_item_clothes_select_tv)
     public void select() {
-        new SingleChoiceDialogFragment().show("选择门店", mStoreNames, new DialogInterface.OnClickListener() {
+        new SingleChoiceDialogFragment().show("选择门店", mStoreNames, mSelectItem,new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mSelectItem = which;
                 mStoreTv.setText(mStoreNames.get(which));
             }
         }, new DialogInterface.OnClickListener() {
@@ -73,10 +81,14 @@ public class AddItemClothesActivity extends BaseActivity implements AddItemCloth
 
     @Override
     protected void init() {
+        Bundle bundle;
+        if ((bundle = getIntent().getExtras()) != null) {
+            mClothesId = bundle.getString(CLOTHES_ID);
+        }
         mIPresenter = new AddItemClothesPresenter(UseCaseHandler.getInstance(),this,
                 new HttpAddItemClothesUseCase(BaseHttpRepository.getBaseHttpRepository()),
                 new HttpGetStoreListUseCase(BaseHttpRepository.getBaseHttpRepository()));
-
+        mIPresenter.getStoreList(String.valueOf(UserManager.getInstance().getId()));
         switchRightTv(View.VISIBLE,"完成");
     }
 
@@ -103,7 +115,7 @@ public class AddItemClothesActivity extends BaseActivity implements AddItemCloth
             return;
         }
 
-        mIPresenter.addItemClothes(color,size,number,store);
+        mIPresenter.addItemClothes(color,size,number,mClothesId,store);
         DialogWrapper.waitDialog(this);
     }
 
@@ -115,8 +127,9 @@ public class AddItemClothesActivity extends BaseActivity implements AddItemCloth
 
     @Override
     public void addSuccess() {
-        DialogWrapper.tipSuccessDialog(this,"添加成功");
+//        DialogWrapper.tipSuccessDialog(this);
         DialogWrapper.dismissWaitDialog();
+        ToastUtil.showShortMsg(this,"添加成功");
         finish();
     }
 

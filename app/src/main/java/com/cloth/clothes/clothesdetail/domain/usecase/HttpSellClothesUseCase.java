@@ -45,12 +45,18 @@ public class HttpSellClothesUseCase extends HttpUseCase<HttpSellClothesUseCase.R
     }
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
-        public final long clothesId;//服装品类id
-        public final double sell;//卖出价格
-        public final long number;//卖出数量
-        public final long userId;//卖出人id
+        public final String  clothesId;//服装品类id
+        public final String  sell;//卖出价格
+        public final String  number;//卖出数量
+        public final String  userId;//卖出人id
 
-        public RequestValue(long clothesId, double sell, long number, long userId) {
+//        String clothesId;//服装品类id
+//        double sell;//卖出价格
+//        long number;//卖出数量
+//        String userId;//卖出人id
+
+
+        public RequestValue(String clothesId, String sell, String number, String userId) {
             this.clothesId = clothesId;
             this.sell = sell;
             this.number = number;

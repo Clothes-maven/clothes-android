@@ -13,6 +13,7 @@ import com.cloth.clothes.R;
 import com.cloth.clothes.home.HomeContract;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.BaseFragment;
+import com.cloth.kernel.base.utils.ToastUtil;
 import com.cloth.kernel.service.LcEventBusWrapper;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -90,9 +91,12 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
     }
 
     @Override
-    public void refresh(List<ClothesBean> clothBeans, boolean isSuccess) {
+    public void refresh(List<ClothesBean> clothBeans, boolean isSuccess,String msg) {
         mRefreshLayout.finishRefresh(isSuccess);
         mRefreshLayout.finishLoadMore(isSuccess);
+        if (!isSuccess) {
+            ToastUtil.showShortMsg(getActivity(),msg);
+        }
         if (clothBeans ==null) return;
         if (mHomeAdapter ==null) {
             mHomeAdapter = new StoreAdapter(clothBeans);
@@ -100,6 +104,12 @@ public class StoreFragment extends BaseFragment implements HomeContract.IStoreVi
         } else {
             mHomeAdapter.refreshItem(clothBeans);
         }
+        mHomeAdapter.setListener(new StoreAdapter.Listener() {
+            @Override
+            public void delete(ClothesBean clothesBean, int position) {
+                mIPresenter.deleteClothes(StoreFragment.this, String.valueOf(clothesBean.id),position);
+            }
+        });
         mHomeAdapter.notifyDataSetChanged();
     }
 

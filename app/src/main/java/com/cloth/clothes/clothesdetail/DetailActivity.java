@@ -1,6 +1,5 @@
 package com.cloth.clothes.clothesdetail;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,11 +13,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpSellClothesUseCase;
+import com.cloth.clothes.clothesdetail.widget.InputDialogBuilder;
 import com.cloth.clothes.home.HomeContract;
 import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.clothes.model.BaseHttpRepository;
 import com.cloth.clothes.model.Role;
 import com.cloth.clothes.model.UserManager;
+import com.cloth.clothes.clothessecondlist.domain.model.ClothesSecondModel;
 import com.cloth.clothes.utils.StringUtils;
 import com.cloth.kernel.base.BaseActivity;
 import com.cloth.kernel.base.mvpclean.UseCaseHandler;
@@ -33,24 +34,25 @@ import butterknife.OnClick;
 @Route(path = DetailActivity.PATH)
 public class DetailActivity extends BaseActivity implements DetailContranct.IView{
     public static final String PATH = "/main/detail";
-    private static String CLOTHES = "clothes_bean";
+    private static String CLOTHES = "clothes_group_bean";
     private static String POSITION = "clothes_position";
 
-    public static void jump(ClothesBean clothesBean,int position) {
+    public static void jump(ClothesSecondModel numberModel, int position) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(CLOTHES, clothesBean);
+        bundle.putSerializable(CLOTHES, numberModel);
         bundle.putInt(POSITION,position);
         LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(PATH,bundle);
     }
 
     @BindView(R.id.activity_detail_recycler_view)
     RecyclerView mRecyclerView;
-    @BindView(R.id.activity_detail_fix_img)
-    ImageView mFixClothes;
+//    @BindView(R.id.activity_detail_fix_img)
+//    ImageView mFixClothes;
 
 
     private DetailContranct.IPresenter mIPresenter;
-    private ClothesBean clothesBean;
+//    private ClothesBean clothesBean;
+    private ClothesSecondModel mClothesGroupModel;
     private DetailClothesAdapter mDetailClothesAdapter;
     private int mPosition;
 
@@ -69,17 +71,17 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
     protected void init() {
         mIPresenter = new DetailPresenter(this, UseCaseHandler.getInstance(),new HttpSellClothesUseCase(BaseHttpRepository.getBaseHttpRepository()),new HttpFixClothesUseCase(BaseHttpRepository.getBaseHttpRepository()));
         if (Role.isOwner(UserManager.getInstance().getRole())) {
-            mFixClothes.setVisibility(View.VISIBLE);
+//            mFixClothes.setVisibility(View.VISIBLE);
         }
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) return;
 
-        clothesBean = (ClothesBean) extras.getSerializable(CLOTHES);
+        mClothesGroupModel = (ClothesSecondModel) extras.getSerializable(CLOTHES);
         mPosition =extras.getInt(POSITION);
-        if (clothesBean ==null) return;
+        if (mClothesGroupModel ==null) return;
 
-        mDetailClothesAdapter = new DetailClothesAdapter(this,clothesBean,false);
+        mDetailClothesAdapter = new DetailClothesAdapter(this,mClothesGroupModel,false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         DividerItemDecoration decoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(decoration);
@@ -90,17 +92,20 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
 
     @OnClick(R.id.activity_detail_sell_img)
     public void sell(View view) {
-        DialogWrapper.inputDialog(this, "价格", "请填写卖出衣服的价格",  new DialogWrapper.InputDialogOkButtonClickListener() {
-            @Override
-            public void onClick(Dialog dialog, String inputText) {
-                if (!StringUtils.isDouble(inputText)) {
-                    ToastUtil.showLongMsg(DetailActivity.this,"价格为纯数字");
-                    return;
-                }
-                mIPresenter.sellClothes(clothesBean,UserManager.getInstance().getId(),Double.valueOf(inputText));
-                dialog.dismiss();
-            }
-        });
+        new InputDialogBuilder(this)
+                .setTitle("价格")
+                .setMessage("请填写卖出衣服的价格")
+                .setListener(new InputDialogBuilder.Listener() {
+                    @Override
+                    public void numberCost(String number, String sell) {
+                        if (!StringUtils.isDouble(sell)) {
+                            ToastUtil.showLongMsg(DetailActivity.this,"价格为纯数字");
+                            return;
+                        }
+                        mIPresenter.sellClothes(mClothesGroupModel.id,UserManager.getInstance().getId(),sell,number);
+                    }
+                }).showDialog();
+
     }
 
     @OnClick(R.id.activity_detail_fix_img)
@@ -132,14 +137,14 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
     @Override
     public void finish() {
         super.finish();
-        LcEventBusWrapper.getInstance().doEvent(HomeContract.IStoreViewFrg.class).refreshItem(mPosition,clothesBean);
+        LcEventBusWrapper.getInstance().doEvent(HomeContract.IStoreViewFrg.class).refreshItem(mPosition,mClothesGroupModel.clothe);
     }
 
     @Override
     public void sellSuccess() {
-        clothesBean.number--;
+        mClothesGroupModel.number--;
         DialogWrapper.tipSuccessDialog(this);
-        mDetailClothesAdapter.refresh(clothesBean);
+        mDetailClothesAdapter.refresh(mClothesGroupModel);
     }
 
     @Override
@@ -148,7 +153,7 @@ public class DetailActivity extends BaseActivity implements DetailContranct.IVie
         switchRightTv(View.GONE,null);
         DialogWrapper.dismissWaitDialog();
         mDetailClothesAdapter.setEnable(false);
-        mDetailClothesAdapter.refresh(clothesBean);
+        mDetailClothesAdapter.refresh(mClothesGroupModel);
     }
 
     @Override

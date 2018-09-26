@@ -13,10 +13,9 @@ public interface DetailContranct {
     interface IPresenter extends IBasePresenter {
         /**
          * 出售商品
-         * @param clothesBean 商品
          * @param userId 用户名
          */
-        void sellClothes(ClothesBean clothesBean,long userId,double  sell);
+        void sellClothes(String cid ,long userId,String  sell,String number);
 
         /**
          * 修改商品被容

@@ -1,7 +1,9 @@
 package com.cloth.clothes.home.domain.model;
 
 
-public class StoreBean {
+import java.io.Serializable;
+
+public class StoreBean implements Serializable{
     public String  id;
     public String name;
     public String address;

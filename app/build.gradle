@@ -55,6 +55,11 @@ android {
             buildConfigField "Boolean", "LOG_DEBUG", 'true'//日志输出
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 def supportLibraryVersion = "27.1.1"
 dependencies {

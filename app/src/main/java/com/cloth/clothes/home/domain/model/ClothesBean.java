@@ -9,13 +9,13 @@ public class ClothesBean implements Serializable{
     public String feature;
     public String brand;
     public String type;
-    public double size;
+//    public double size;
     public String texture;
-    public String collar;
-    public String sleeve;
+    public String couar;//领型
+    public String sleeve;//袖长
     public String batch;
     public double cost;
-    public long number;
+//    public long number;
     public double profit;
     public String clothesUrl;
 }

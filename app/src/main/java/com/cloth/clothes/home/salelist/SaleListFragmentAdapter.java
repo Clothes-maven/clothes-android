@@ -39,10 +39,10 @@ public class SaleListFragmentAdapter extends RecyclerView.Adapter<SaleListFragme
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         SaleBean saleBean = mSaleBeanList.get(position);
 //        holder.imgUrl
-        holder.name.setText(saleBean.clothes.name);
-        holder.cost.setText(String.valueOf(saleBean.clothes.cost));
+        holder.name.setText(saleBean.clothdetail.clothe.name);
+        holder.cost.setText(String.valueOf(saleBean.clothdetail.clothe.cost));
         holder.sale.setText(String.valueOf(saleBean.sell));
-        double profit = saleBean.sell - saleBean.clothes.cost;
+        double profit = saleBean.sell - saleBean.clothdetail.clothe.cost;
         holder.profit.setText(String.valueOf(profit));
         holder.employee.setText(saleBean.user.name);
         holder.time.setText(saleBean.createDate);

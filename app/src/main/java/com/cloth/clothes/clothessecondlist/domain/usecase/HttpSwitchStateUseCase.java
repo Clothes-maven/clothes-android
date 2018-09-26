@@ -1,33 +1,30 @@
-package com.cloth.clothes.storelist.domain.usecase;
+package com.cloth.clothes.clothessecondlist.domain.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.storelist.domain.model.NumberModel;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;
 import com.cloth.kernel.service.http.model.BaseResponse;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
 /**
  * 商品数量列表
  */
-public class HttpStoreListUseCase extends HttpUseCase<HttpStoreListUseCase.RequestValue, HttpStoreListUseCase.ResponseValue> {
+public class HttpSwitchStateUseCase extends HttpUseCase<HttpSwitchStateUseCase.RequestValue, HttpSwitchStateUseCase.ResponseValue> {
 
 
     private IHttpRepository mIHttpRepository;
 
-    public HttpStoreListUseCase(@NonNull IHttpRepository iHttpRepository) {
+    public HttpSwitchStateUseCase(@NonNull IHttpRepository iHttpRepository) {
         this.mIHttpRepository = iHttpRepository;
     }
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
-        return mIHttpRepository.exec(ApiService.class).getClothesList(requestValue.getCid(),requestValue.getSid());
+        return mIHttpRepository.exec(ApiService.class).switchState(requestValue.getCid(),requestValue.getIsStopSell());
     }
 
     @Override
@@ -52,23 +49,22 @@ public class HttpStoreListUseCase extends HttpUseCase<HttpStoreListUseCase.Reque
 
     public static final class RequestValue extends HttpUseCase.RequestValues {
         private final String cid;
-        private final String sid;
+        private final String isStopSell;
 
         public String getCid() {
             return cid;
         }
 
-        public String getSid() {
-            return sid;
+        public String getIsStopSell() {
+            return isStopSell;
         }
 
-        public RequestValue(String cid, String sid) {
+        public RequestValue(String cid, String isStopSell) {
             this.cid = cid;
-            this.sid = sid;
+            this.isStopSell = isStopSell;
         }
     }
 
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<NumberModel> clothdetails;
     }
 }

@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.cloth.clothes.R;
 import com.cloth.clothes.addclothes.addbatch.AddClothesActivity;
 import com.cloth.clothes.home.homefragment.StoreFragment;
+import com.cloth.clothes.home.homefragment.domain.usecase.HttpDeleteClothesUseCase;
 import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.home.salelist.SaleListFragment;
 import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
@@ -50,7 +51,7 @@ public class HomeActivity extends BaseActivity
         Bundle bundle = new Bundle();
         bundle.putLong(ROLE, role);
         bundle.putLong(ID, id);
-        LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(PATH,bundle);
+        LcRouterWrapper.getLcRouterWrapper().jumpActWithBundle(PATH, bundle);
     }
 
     @BindView(R.id.toolbar)
@@ -94,7 +95,7 @@ public class HomeActivity extends BaseActivity
         mHeader = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_main_head_img);
         mAddressTv = mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_main_address_tv);
 
-        if (Role.isOwner(mRole) ) {
+        if (Role.isOwner(mRole)) {
             mSellListItem.setVisible(true);
             mAddBtn.setVisibility(View.VISIBLE);
         } else {
@@ -120,7 +121,8 @@ public class HomeActivity extends BaseActivity
 
         mIPresenter = new HomeFrgPresenter(UseCaseHandler.getInstance(),
                 new HttpGetClothesUseCase(BaseHttpRepository.getBaseHttpRepository()),
-                new HttpSaleListUseCase(BaseHttpRepository.getBaseHttpRepository()));
+                new HttpSaleListUseCase(BaseHttpRepository.getBaseHttpRepository()),
+                new HttpDeleteClothesUseCase(BaseHttpRepository.getBaseHttpRepository()));
 
 
         mStoreFragment = StoreFragment.newInstance();
@@ -143,13 +145,13 @@ public class HomeActivity extends BaseActivity
             mDrawerLayout.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_sell_list) {
-            if (mSaleListFragment ==null) {
+            if (mSaleListFragment == null) {
                 mSaleListFragment = SaleListFragment.newInstance();
                 mSaleListFragment.setPresenter(mIPresenter);
             }
-            switchContent(getSupportFragmentManager(),R.id.contentFrame,currentFragm,mSaleListFragment);
-        } else if (id ==R.id.nav_store) {
-            switchContent(getSupportFragmentManager(),R.id.contentFrame,currentFragm,mStoreFragment);
+            switchContent(getSupportFragmentManager(), R.id.contentFrame, currentFragm, mSaleListFragment);
+        } else if (id == R.id.nav_store) {
+            switchContent(getSupportFragmentManager(), R.id.contentFrame, currentFragm, mStoreFragment);
         }
 
         getSupportActionBar().setTitle(item.getTitle());
@@ -175,9 +177,9 @@ public class HomeActivity extends BaseActivity
     }
 
 
-
     //============================================================================
     private long clickTime = 0; //记录第一次点击的时间
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -186,6 +188,7 @@ public class HomeActivity extends BaseActivity
         }
         return super.onKeyDown(keyCode, event);
     }
+
     private void exit() {
         if ((System.currentTimeMillis() - clickTime) > 2000) {
             ToastUtil.showLongMsg(getApplicationContext(), "再按一次后退键退出程序");

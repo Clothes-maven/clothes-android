@@ -1,9 +1,9 @@
-package com.cloth.clothes.addclothes.additem.domian.usecase;
+package com.cloth.clothes.home.homefragment.domain.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.cloth.clothes.common.http.ApiService;
-import com.cloth.clothes.home.domain.model.StoreBean;
+import com.cloth.clothes.home.domain.model.ClothesBean;
 import com.cloth.kernel.base.mvpclean.HttpUseCase;
 import com.cloth.kernel.base.mvpclean.IHttpRepository;
 import com.cloth.kernel.service.http.BaseObserver;
@@ -13,33 +13,29 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- * 商品数量列表
- */
-public class HttpGetStoreListUseCase extends HttpUseCase<HttpGetStoreListUseCase.RequestValue, HttpGetStoreListUseCase.ResponseValue> {
+public class HttpDeleteClothesUseCase extends HttpUseCase<HttpDeleteClothesUseCase.RequestValue, HttpDeleteClothesUseCase.ResponseValue> {
+
+    private final IHttpRepository mIHttpRepository;
 
 
-    private IHttpRepository mIHttpRepository;
-
-    public HttpGetStoreListUseCase(@NonNull IHttpRepository iHttpRepository) {
-        this.mIHttpRepository = iHttpRepository;
+    public HttpDeleteClothesUseCase(@NonNull IHttpRepository httpRepository) {
+        this.mIHttpRepository = httpRepository;
     }
 
     @Override
     protected Observable<BaseResponse<ResponseValue>> params(RequestValue requestValue) {
-        return mIHttpRepository.exec(ApiService.class).getStoreList();
+        return mIHttpRepository.exec(ApiService.class).haltSale(requestValue.cid);
     }
 
     @Override
     protected void exec(Observable<BaseResponse<ResponseValue>> observable) {
         observable.subscribe(new BaseObserver<BaseResponse<ResponseValue>>() {
-
             @Override
-            public void success(BaseResponse<ResponseValue> response) {
-                if (response.getCode() == SUCCESS) {
-                    getUseCaseCallback().onSuccess(response.getContent());
+            public void success(BaseResponse<ResponseValue> clothes) {
+                if (clothes.getCode() == SUCCESS) {
+                    getUseCaseCallback().onSuccess(clothes.getContent());
                 } else {
-                    getUseCaseCallback().onError(response.getCode(), response.getMsg());
+                    getUseCaseCallback().onError(clothes.getCode(), clothes.getMsg());
                 }
             }
 
@@ -50,11 +46,15 @@ public class HttpGetStoreListUseCase extends HttpUseCase<HttpGetStoreListUseCase
         });
     }
 
-    public static final class RequestValue extends HttpUseCase.RequestValues {
 
+    public static final class RequestValue extends HttpUseCase.RequestValues {
+        public final String cid;
+
+        public RequestValue(String cid) {
+            this.cid = cid;
+        }
     }
 
     public static final class ResponseValue extends HttpUseCase.ResponseValue {
-        public List<StoreBean> stores;
     }
 }

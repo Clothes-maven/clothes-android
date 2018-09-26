@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AddItemClothesContract {
     interface IPresenter extends IBasePresenter {
-        void addItemClothes(String color,String size,String number,String sid);
+        void addItemClothes(String color,String size,String number,String clothesId,String sid);
         void getStoreList(String uid);
     }
 

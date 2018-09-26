@@ -28,7 +28,7 @@ public class AddItemClothesPresenter implements AddItemClothesContract.IPresente
     }
 
     @Override
-    public void addItemClothes(String color, String size, String number, String storeName) {
+    public void addItemClothes(String color, String size, String number, String clothesId,String storeName) {
         String sid = null;
         for (StoreBean storeBean : mStoreBeans) {
             if (storeBean.name.equals(storeName)) {
@@ -36,7 +36,7 @@ public class AddItemClothesPresenter implements AddItemClothesContract.IPresente
                 break;
             }
         }
-        mUseCaseHandler.execute(mHttpAddItemClothesUseCase, new HttpAddItemClothesUseCase.RequestValue(sid, number, size, color), new UseCase.UseCaseCallback<HttpAddItemClothesUseCase.ResponseValue>() {
+        mUseCaseHandler.execute(mHttpAddItemClothesUseCase, new HttpAddItemClothesUseCase.RequestValue(size,color,number,clothesId,sid), new UseCase.UseCaseCallback<HttpAddItemClothesUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpAddItemClothesUseCase.ResponseValue response) {
                 if (mIView !=null) {
@@ -55,7 +55,7 @@ public class AddItemClothesPresenter implements AddItemClothesContract.IPresente
 
     @Override
     public void getStoreList(String uid) {
-        mUseCaseHandler.execute(mHttpGetStoreListUseCase, new HttpGetStoreListUseCase.RequestValue(uid), new UseCase.UseCaseCallback<HttpGetStoreListUseCase.ResponseValue>() {
+        mUseCaseHandler.execute(mHttpGetStoreListUseCase, new HttpGetStoreListUseCase.RequestValue(), new UseCase.UseCaseCallback<HttpGetStoreListUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpGetStoreListUseCase.ResponseValue response) {
                 mStoreBeans = response.stores;

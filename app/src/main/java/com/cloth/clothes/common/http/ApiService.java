@@ -6,10 +6,13 @@ import com.cloth.clothes.addclothes.additem.domian.usecase.HttpGetStoreListUseCa
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpFixClothesUseCase;
 import com.cloth.clothes.clothesdetail.domain.usecase.HttpSellClothesUseCase;
 import com.cloth.clothes.home.domain.model.ClothesBean;
+import com.cloth.clothes.home.homefragment.domain.usecase.HttpDeleteClothesUseCase;
 import com.cloth.clothes.home.homefragment.domain.usecase.HttpGetClothesUseCase;
 import com.cloth.clothes.home.salelist.domain.usecase.HttpSaleListUseCase;
 import com.cloth.clothes.login.usecase.HttpLoginUseCase;
-import com.cloth.clothes.storelist.domain.usecase.HttpStoreListUseCase;
+import com.cloth.clothes.clothessecondlist.domain.usecase.HttpDeleteItemUseCase;
+import com.cloth.clothes.clothessecondlist.domain.usecase.HttpStoreListUseCase;
+import com.cloth.clothes.clothessecondlist.domain.usecase.HttpSwitchStateUseCase;
 import com.cloth.kernel.service.http.model.BaseResponse;
 
 import io.reactivex.Observable;
@@ -40,9 +43,23 @@ public interface ApiService {
     @GET("/store/getClothDetails")
     Observable<BaseResponse<HttpStoreListUseCase.ResponseValue>> getClothesList(@Query("cid") String  cid , @Query("sid") String  sid);
 
-    @GET("/store/getClothDetails")
-    Observable<BaseResponse<HttpAddItemClothesUseCase.ResponseValue>> addItem(@Query("sid") String  sid , @Query("color") String  color,@Query("number")String number,@Query("size") String size);
+    //批次停止出售
+    @GET("/store/haltSale")
+    Observable<BaseResponse<HttpDeleteClothesUseCase.ResponseValue>> haltSale(@Query("cid") String  cid);
 
-    @POST("/store/getClothDetails")
-    Observable<BaseResponse<HttpGetStoreListUseCase.ResponseValue>> getStoreList(@Body HttpGetStoreListUseCase.RequestValue body);
+    //获取门店列表
+    @GET("/store/getStores")
+    Observable<BaseResponse<HttpGetStoreListUseCase.ResponseValue>> getStoreList();
+
+    //修改衣服状态
+    @GET("/store/stopOrStartSell")
+    Observable<BaseResponse<HttpSwitchStateUseCase.ResponseValue>> switchState(@Query("cid") String  cid , @Query("isStopSell") String  isStopSell);
+
+    //删除某个item 批次
+    @GET("store/deleteClothDetail")
+    Observable<BaseResponse<HttpDeleteItemUseCase.ResponseValue>> deleteClothesItem(@Query("cid") String  cid);
+
+    //添加某个item 批次
+    @POST("/store/addClothDetail")
+    Observable<BaseResponse<HttpAddItemClothesUseCase.ResponseValue>> addClothesItem(@Body HttpAddItemClothesUseCase.RequestValue body);
 }

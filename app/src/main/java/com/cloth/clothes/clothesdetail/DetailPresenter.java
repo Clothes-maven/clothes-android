@@ -29,16 +29,20 @@ public class DetailPresenter implements DetailContranct.IPresenter {
 
 
     @Override
-    public void sellClothes(ClothesBean clothesBean, long userId,double sell) {
-        mUseCaseHandler.execute(mSellClothesUseCase, new HttpSellClothesUseCase.RequestValue(clothesBean.id,sell,1,userId), new UseCase.UseCaseCallback<HttpSellClothesUseCase.ResponseValue>() {
+    public void sellClothes(String cid, long userId, String sell, String number) {
+        mUseCaseHandler.execute(mSellClothesUseCase, new HttpSellClothesUseCase.RequestValue(cid,sell,number,String.valueOf(userId)), new UseCase.UseCaseCallback<HttpSellClothesUseCase.ResponseValue>() {
             @Override
             public void onSuccess(HttpSellClothesUseCase.ResponseValue response) {
-                mIView.sellSuccess();
+                if (mIView !=null) {
+                    mIView.sellSuccess();
+                }
             }
 
             @Override
             public void onError(int code, String msg) {
-                mIView.error(msg);
+                if (mIView !=null) {
+                    mIView.error(msg);
+                }
             }
         });
     }
